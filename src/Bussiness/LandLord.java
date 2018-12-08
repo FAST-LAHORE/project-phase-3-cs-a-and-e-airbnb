@@ -12,7 +12,19 @@ package Bussiness;
 public class LandLord {
     String sClearance;
     String cnicPhoto;
+    String name;
+    String email;
+    String contact;
+    String address;
     
+    LandLord(String sClearance,String name,String email,String contact,String address)
+    {
+        this.address=address;
+        this.contact=contact;
+        this.email=email;
+        this.name=name;
+        this.sClearance=sClearance;
+    }
     public Boolean cnicUploaded()   {
         return cnicPhoto != null;
     }
