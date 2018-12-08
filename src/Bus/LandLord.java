@@ -18,6 +18,10 @@ public class LandLord extends User implements Serializable {
     public LandLord(String name, String userId, String nationalId, String picture, String phone, String email, String password) {
         super(name, userId, nationalId, picture, phone, email, password);
     }
+
+    public LandLord(String name, String userId, String nationalId, String picture) {
+        super(name, userId, nationalId, picture);
+    }
     
     public Boolean cnicUploaded()   {
         return cnicPhoto != null;
