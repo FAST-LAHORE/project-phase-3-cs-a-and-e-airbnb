@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness;
+package Bus;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author hp
  */
-public class Property {
+public class Property implements Serializable  {
     
     PropertyType        pType;
     List<Facilties>     pFacilities;
@@ -23,6 +24,9 @@ public class Property {
     List<Float>         Ratings;       
     HashSet<Date>       datesBooked;
     
+    String propertyAdd;
+    String propertyCity;
+    String propertyName;
     String propertyId;
     LandLord pLandLord;
 
@@ -32,6 +36,31 @@ public class Property {
     // CHECK CURRENT dATE AND bOOKED DATE
         throw new UnsupportedOperationException();
     }
+
+    public String getPropertyAdd() {
+        return propertyAdd;
+    }
+
+    public void setPropertyAdd(String propertyAdd) {
+        this.propertyAdd = propertyAdd;
+    }
+
+    public String getPropertyCity() {
+        return propertyCity;
+    }
+
+    public void setPropertyCity(String propertyCity) {
+        this.propertyCity = propertyCity;
+    }
+
+    public String getPropertyName() {
+        return propertyName;
+    }
+
+    public void setPropertyName(String propertyName) {
+        this.propertyName = propertyName;
+    }
+    
     
      public LandLord getpLandLord() {
         return pLandLord;

@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness;
+package Bus;
+
+import java.io.Serializable;
 
 /**
  *
  * @author hp
  */
-public class User {
+public class User implements Serializable {
     String name;
     String userId;
     String nationalId;

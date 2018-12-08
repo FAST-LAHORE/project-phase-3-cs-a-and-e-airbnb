@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness;
+package Bus;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author hp
  */
-public class BookingManager {
+public class BookingManager implements Serializable {
 
     public static Boolean addBooking(Booking b) {
         throw new UnsupportedOperationException();

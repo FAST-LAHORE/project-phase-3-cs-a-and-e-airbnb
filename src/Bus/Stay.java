@@ -3,17 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness;
+package Bus;
+
+import java.io.Serializable;
 
 /**
  *
  * @author hp
  */
-public class Stay {
+public class Stay implements Serializable{
     Booking sBook;
     String numPeople;
     String Status;
     Payment sPay;
+    String statusId;
+
+    public String getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(String statusId) {
+        this.statusId = statusId;
+    }
+    
+    
 
     public Booking getsBook() {
         return sBook;

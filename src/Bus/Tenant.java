@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness;
+package Bus;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author hp
  */
-public class Tenant extends User {
+public class Tenant extends User implements Serializable {
     String currency;
     String education;
     String work;
@@ -22,6 +23,8 @@ public class Tenant extends User {
     
     // Out of 10
     Float Rating;
+    
+    
     
     Boolean requestBooking(Property p){
         throw new UnsupportedOperationException();

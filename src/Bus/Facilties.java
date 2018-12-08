@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness;
+package Bus;
+
+import java.io.Serializable;
 
 /**
  *
  * @author hp
  */
-public enum Facilties {
+public enum Facilties implements Serializable {
     
 }

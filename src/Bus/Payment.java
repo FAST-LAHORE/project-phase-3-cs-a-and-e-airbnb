@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness;
+package Bus;
 
 /**
  *
  * @author hp
  */
-public class Report {
-    User filer;
-    String Status;
-    String Description;
-    Stay stayR;
+public class Payment {
+    
 }

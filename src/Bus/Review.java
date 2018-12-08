@@ -3,17 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness;
+package Bus;
+
+import java.io.Serializable;
 
 /**
  *
  * @author hp
  */
-public class Review {
+public class Review implements Serializable {
     User Reviewer;
     User Reviewee;
     String Description;
     Stay stayReview;
+    String ReviewId;
+
+    public Stay getStayReview() {
+        return stayReview;
+    }
+
+    public void setStayReview(Stay stayReview) {
+        this.stayReview = stayReview;
+    }
+
+    public String getReviewId() {
+        return ReviewId;
+    }
+
+    public void setReviewId(String ReviewId) {
+        this.ReviewId = ReviewId;
+    }
+    
 
     public User getReviewer() {
         return Reviewer;

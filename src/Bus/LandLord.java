@@ -3,15 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Bussiness;
+package Bus;
+
+import java.io.Serializable;
 
 /**
  *
  * @author hp
  */
-public class LandLord {
+public class LandLord extends User implements Serializable {
     String sClearance;
     String cnicPhoto;
+
+    public LandLord(String name, String userId, String nationalId, String picture, String phone, String email, String password) {
+        super(name, userId, nationalId, picture, phone, email, password);
+    }
     
     public Boolean cnicUploaded()   {
         return cnicPhoto != null;
