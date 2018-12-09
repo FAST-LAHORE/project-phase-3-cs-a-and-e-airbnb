@@ -1,0 +1,6 @@
+Login Table(Table for tenants)
+Email(varchar primarykey), Password(varchar), Name(varchar), Userid(varchar)
+
+
+LandLord Table(Table for Landlord)
+Email(varchar primarykey), Password(varchar), Name(varchar), Userid(varchar)
