@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package Gui;
-
+import javax.swing.JRootPane;
 /**
  *
  * @author Abbas
@@ -14,6 +14,7 @@ public class ViewUser extends javax.swing.JFrame {
     /**
      * Creates new form ViewUser
      */
+    private int count = 0;
     public ViewUser() {
         initComponents();
     }
