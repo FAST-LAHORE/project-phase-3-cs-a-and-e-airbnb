@@ -79,6 +79,7 @@ public class LandLordDashboard extends javax.swing.JFrame {
         editBtn = new javax.swing.JButton();
         signoutBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         parentPanel = new javax.swing.JPanel();
         propertyView = new javax.swing.JPanel();
         search = new javax.swing.JPanel();
@@ -208,6 +209,8 @@ public class LandLordDashboard extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Edit Property");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -215,6 +218,7 @@ public class LandLordDashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -229,7 +233,9 @@ public class LandLordDashboard extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(30, 30, 30)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(32, 32, 32)
                 .addComponent(bookBtn)
@@ -621,6 +627,7 @@ public class LandLordDashboard extends javax.swing.JFrame {
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
