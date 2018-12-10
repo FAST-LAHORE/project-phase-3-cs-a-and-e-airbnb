@@ -5,6 +5,12 @@
  */
 package Gui;
 
+import Bus.Property;
+import java.awt.Color;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 
@@ -72,6 +78,7 @@ public class LandLordDashboard extends javax.swing.JFrame {
         editBtn = new javax.swing.JButton();
         signoutBtn = new javax.swing.JButton();
         parentPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         propertyView = new javax.swing.JPanel();
         search = new javax.swing.JPanel();
         bookMark = new javax.swing.JPanel();
@@ -148,8 +155,18 @@ public class LandLordDashboard extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(255, 102, 102));
 
         bookBtn.setText("View Stays");
+        bookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookBtnActionPerformed(evt);
+            }
+        });
 
         stayBtn.setText("End Stay");
+        stayBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stayBtnActionPerformed(evt);
+            }
+        });
 
         searchBtn.setText("Post Property");
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -159,8 +176,18 @@ public class LandLordDashboard extends javax.swing.JFrame {
         });
 
         editBtn.setText("Edit Profile");
+        editBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBtnActionPerformed(evt);
+            }
+        });
 
         signoutBtn.setText("Sign Out");
+        signoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signoutBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -197,6 +224,19 @@ public class LandLordDashboard extends javax.swing.JFrame {
         parentPanel.setAutoscrolls(true);
         parentPanel.setLayout(new java.awt.CardLayout());
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 764, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 626, Short.MAX_VALUE)
+        );
+
+        parentPanel.add(jPanel3, "card6");
+
         javax.swing.GroupLayout propertyViewLayout = new javax.swing.GroupLayout(propertyView);
         propertyView.setLayout(propertyViewLayout);
         propertyViewLayout.setHorizontalGroup(
@@ -210,7 +250,7 @@ public class LandLordDashboard extends javax.swing.JFrame {
 
         parentPanel.add(propertyView, "card5");
 
-        search.setBackground(new java.awt.Color(102, 102, 102));
+        search.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
         search.setLayout(searchLayout);
@@ -282,7 +322,7 @@ public class LandLordDashboard extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(parentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)))
+                        .addComponent(parentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -336,9 +376,66 @@ public class LandLordDashboard extends javax.swing.JFrame {
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         // TODO add your handling code here:
-        addPanel(search);
+        //addPanel(search);
+     
+                        //search.add(jl2);
+        try {
+                    List<Property> temp=Data.PropertyList.getAllProperty();
+                    Property pp = new Property();
+                    pp.setPropertyName("test");
+                    pp.setPropertyCity("test1");
+                    temp.add(pp);
+                    for (Property p:temp)
+                    {
+                        JPanel jp = new JPanel();
+                        JLabel jl = new JLabel ();
+                        jl.setText("Name: ");
+                        jl.setBackground(Color.BLACK);
+                        JLabel jf = new JLabel();
+                        jf.setText(p.getPropertyName());
+                        JLabel jl1 = new JLabel ();
+                        jl1.setText("Location: ");
+                        jl1.setBackground(Color.BLACK);
+                        JLabel jf1 = new JLabel();
+                        jf1.setText(p.getPropertyCity());
+                        
+                        jp.add(jl);
+                        jp.add(jf);
+                        jp.add(jl1);
+                        jp.add(jf1);
+                        jp.setVisible(true);
+                        addPanel(jp);
+                        
+                        //search.add(jp);
+                    }
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(LandLordDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        
+               // JPanel jp = new JPanel(); 
+                
+                
+              
 
     }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void bookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookBtnActionPerformed
+        // TODO add your handling code here:
+        addPanel(jPanel3);
+       
+    }//GEN-LAST:event_bookBtnActionPerformed
+
+    private void stayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stayBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stayBtnActionPerformed
+
+    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_editBtnActionPerformed
+
+    private void signoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_signoutBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -386,6 +483,7 @@ public class LandLordDashboard extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel nameHolder;
