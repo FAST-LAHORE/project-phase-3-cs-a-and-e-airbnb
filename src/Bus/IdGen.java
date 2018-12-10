@@ -29,7 +29,10 @@ public class IdGen implements Serializable {
     protected  Integer reportIdGen = 0;
     protected Integer reviewIdGen = 0;
     protected  Integer stayIdGen = 0;
-    
+    protected  Integer bookingIdGen = 0;
+    public  String genBookingId()    {
+        return String.valueOf(bookingIdGen++);
+    }
     public  String genPropertyId()    {
         return String.valueOf(propertyIdGen++);
     }

@@ -6,6 +6,7 @@
 package Bus;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -13,39 +14,52 @@ import java.util.List;
  * @author hp
  */
 public class Tenant extends User implements Serializable {
+
     String currency;
     String education;
     String work;
     String address;
-    
+
     List<Stay> pastStays;
     List<BookMark> myBookMarks;
-    
+
     // Out of 10
     Float Rating;
-    
-    
-    
-    Boolean requestBooking(Property p){
+
+    public Boolean requestBooking(Property p, LocalDate s, LocalDate e) throws ClassNotFoundException {
+        if (Data.PropertyList.validDate(p, s, e)) {
+            Data.BookingList.addBooking(new Booking(Bus.IdGen.getInstance().genBookMarkId(), s, e, "pending", this, p));
+            for (LocalDate date = s; date.isBefore(e); date = date.plusDays(1)) {
+                p.getDatesBooked().add(date.toString());
+            }
+            return true;
+        } 
+        else {
+            return false;
+        }
+    }
+
+    public Boolean cancelBooking(Booking b) {
         throw new UnsupportedOperationException();
     }
-    Boolean cancelBooking(Booking b){
+
+    public Boolean makeBookMark(Property p) throws ClassNotFoundException {
+        return Data.BookMarkList.addBookMark(new BookMark(IdGen.getInstance().genBookMarkId(), this, p));
+    }
+
+    public Boolean fileComplaint(Stay s) {
         throw new UnsupportedOperationException();
     }
-    Boolean makeBookMark(Property p){
+
+    public Boolean makeReview(Stay s) {
         throw new UnsupportedOperationException();
     }
-    Boolean fileComplaint(Stay s){
-        throw new UnsupportedOperationException();
-    }
-    Boolean makeReview(Stay s){
-        throw new UnsupportedOperationException();
-    } 
 
     public Tenant(String name, String userId, String nationalId, String picture) {
         super(name, userId, nationalId, picture);
     }
-     public Tenant(String name, String userId, String nationalId, String picture, String phone, String email, String password) {
+
+    public Tenant(String name, String userId, String nationalId, String picture, String phone, String email, String password) {
         super(name, userId, nationalId, picture, phone, email, password);
     }
 
@@ -56,8 +70,6 @@ public class Tenant extends User implements Serializable {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
-
-   
 
     public String getEducation() {
         return education;
@@ -90,6 +102,5 @@ public class Tenant extends User implements Serializable {
     public void setRating(Float Rating) {
         this.Rating = Rating;
     }
-    
-    
+
 }

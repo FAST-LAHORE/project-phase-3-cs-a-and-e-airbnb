@@ -48,6 +48,7 @@ public class BookingList  {
         }
         return false;
     }
+    
     public static String checkBooking(Booking b) throws ClassNotFoundException   {
         load();
         String e =null;

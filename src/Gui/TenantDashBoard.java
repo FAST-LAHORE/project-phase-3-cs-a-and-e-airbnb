@@ -5,10 +5,13 @@
  */
 package Gui;
 
+import Bus.BookMark;
+import Bus.Booking;
 import Bus.Facilties;
 import Bus.Property;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.Image;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -27,6 +30,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.xml.bind.ParseConversionEvent;
 
 /**
  *
@@ -38,14 +42,14 @@ public class TenantDashBoard extends javax.swing.JFrame {
      * Creates new form TenantDashBoard
      */
     List<Property> searchResult;
-    Boolean filterVisible = false;
-
+    Boolean filterVisible = true;
+    Property currentProp;
     public TenantDashBoard() {
         setUndecorated(true);
         getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
         initComponents();
-
+        nameHolder.setText(Bus.system.getCurrentTenant().getName());
         CardLayout Cards = (CardLayout) parentPanel.getLayout();
         Cards.show(parentPanel, "card6");
 
@@ -56,12 +60,27 @@ public class TenantDashBoard extends javax.swing.JFrame {
         getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
         initComponents();
-        nameHolder.setText(c.getName());
+
         CardLayout Cards = (CardLayout) parentPanel.getLayout();
         Cards.show(parentPanel, "card6");
 
     }
 
+    public void showProperty(Property p) {
+        try {
+            //jLabel6.setIcon((p.getpImage()));
+            jTextField2.setText(p.getPropertyName());
+            jTextField3.setText(p.getPropertyAdd());
+            jTextField4.setText(String.valueOf(p.getpCharge()));
+            jTextField5.setText(String.valueOf(p.getAverageRating()));
+            jTextArea1.setText(p.getPropertyDesc());
+        }
+        catch(Exception e){
+            printError("Error", "Error in loading property");
+        }
+            
+
+    }
 //public static String getLookAndFeelClassName(String nameSnippet) {
 //    LookAndFeelInfo[] plafs = UIManager.getInstalledLookAndFeels();
 //    for (LookAndFeelInfo info : plafs) {
@@ -71,6 +90,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
 //    }
 //    return null;
 //}
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,16 +121,37 @@ public class TenantDashBoard extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         pTable = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
+        fromPropBtn = new javax.swing.JButton();
         makeBkBtn = new javax.swing.JButton();
         tenantView = new javax.swing.JPanel();
         propertyView = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        frDateCh2 = new com.toedter.calendar.JDateChooser();
+        jLabel14 = new javax.swing.JLabel();
+        toDateCh2 = new com.toedter.calendar.JDateChooser();
+        jLabel15 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         search = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         magnifyBtn = new javax.swing.JButton();
         typeLabel = new javax.swing.JLabel();
         resLabel = new javax.swing.JLabel();
-        AmenLabel = new javax.swing.JLabel();
+        amenLabel = new javax.swing.JLabel();
         facLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         typeList = new javax.swing.JList<>();
@@ -127,10 +168,10 @@ public class TenantDashBoard extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         bookMark = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        undoBkBtn = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton5 = new javax.swing.JButton();
+        bTable = new javax.swing.JTable();
+        fromBookMark = new javax.swing.JButton();
         stays = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -281,7 +322,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
 
         pTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Image", "ID", "Name", "Description", "Cost", "Rating"
@@ -307,10 +348,10 @@ public class TenantDashBoard extends javax.swing.JFrame {
             pTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        jButton3.setText("View");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        fromPropBtn.setText("View");
+        fromPropBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                fromPropBtnActionPerformed(evt);
             }
         });
 
@@ -334,7 +375,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
                         .addGap(265, 265, 265)
                         .addComponent(makeBkBtn)
                         .addGap(207, 207, 207)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fromPropBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(allPropertyLayout.createSequentialGroup()
                         .addGap(17, 17, 17)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -347,11 +388,11 @@ public class TenantDashBoard extends javax.swing.JFrame {
                 .addComponent(jLabel9)
                 .addGap(9, 9, 9)
                 .addGroup(allPropertyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(fromPropBtn)
                     .addComponent(makeBkBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
 
         parentPanel.add(allProperty, "card7");
@@ -364,20 +405,161 @@ public class TenantDashBoard extends javax.swing.JFrame {
         );
         tenantViewLayout.setVerticalGroup(
             tenantViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 845, Short.MAX_VALUE)
+            .addGap(0, 883, Short.MAX_VALUE)
         );
 
         parentPanel.add(tenantView, "card6");
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel5.setText("Property: ");
+
+        jLabel6.setText(" ");
+
+        jLabel7.setText("Name:");
+
+        jTextField2.setEditable(false);
+        jTextField2.setText(" ");
+
+        jLabel8.setText("Property Address:");
+
+        jTextField3.setEditable(false);
+        jTextField3.setText(" ");
+
+        jLabel11.setText("Cost:");
+
+        jTextField4.setEditable(false);
+        jTextField4.setText(" ");
+
+        jLabel12.setText("Rating:");
+
+        jTextField5.setEditable(false);
+        jTextField5.setText(" ");
+
+        jButton2.setText("Make Booking");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("View Land Lord");
+
+        jLabel13.setText("From: ");
+
+        jLabel14.setText("To:");
+
+        jLabel15.setText("People:");
+
+        jTextField6.setText("            ");
+
+        jLabel16.setText("Description: ");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane7.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout propertyViewLayout = new javax.swing.GroupLayout(propertyView);
         propertyView.setLayout(propertyViewLayout);
         propertyViewLayout.setHorizontalGroup(
             propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1017, Short.MAX_VALUE)
+            .addGroup(propertyViewLayout.createSequentialGroup()
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGap(407, 407, 407)
+                        .addComponent(jLabel5))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGap(437, 437, 437)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(propertyViewLayout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel15))
+                .addGap(18, 18, 18)
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField4)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(327, 327, 327))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(toDateCh2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(frDateCh2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         propertyViewLayout.setVerticalGroup(
             propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 845, Short.MAX_VALUE)
+            .addGroup(propertyViewLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jButton2))
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel8)))
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jButton4)))
+                .addGap(28, 28, 28)
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel16)
+                        .addGap(109, 109, 109))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, propertyViewLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)))
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addComponent(frDateCh2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(toDateCh2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)))
+                    .addComponent(jLabel13))
+                .addGap(44, 44, 44)
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         parentPanel.add(propertyView, "card5");
@@ -395,7 +577,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
 
         resLabel.setText("Restrictions:");
 
-        AmenLabel.setText("Amenities:");
+        amenLabel.setText("Amenities:");
 
         facLabel.setText("Facilities:");
 
@@ -429,6 +611,11 @@ public class TenantDashBoard extends javax.swing.JFrame {
         jScrollPane4.setViewportView(facList);
 
         jRadioButton1.setText("Filter");
+        jRadioButton1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButton1StateChanged(evt);
+            }
+        });
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
@@ -450,7 +637,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
                             .addGap(244, 244, 244)
                             .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(searchLayout.createSequentialGroup()
-                                    .addComponent(AmenLabel)
+                                    .addComponent(amenLabel)
                                     .addGap(367, 367, 367)
                                     .addComponent(facLabel))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -506,7 +693,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
                             .addGroup(searchLayout.createSequentialGroup()
                                 .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(facLabel)
-                                    .addComponent(AmenLabel))
+                                    .addComponent(amenLabel))
                                 .addGap(18, 18, 18)
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -529,42 +716,45 @@ public class TenantDashBoard extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel10.setText("Book Marks");
 
-        jButton2.setText("Undo Book Mark");
+        undoBkBtn.setText("Undo Book Mark");
+        undoBkBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                undoBkBtnActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        bTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "Image", "ID", "Name", "Description", "Cost", "Rating"
+                "Image", "Book ID", "ID", "Name", "Description", "Cost", "Rating"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane6.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        bTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(bTable);
+        if (bTable.getColumnModel().getColumnCount() > 0) {
+            bTable.getColumnModel().getColumn(0).setResizable(false);
+            bTable.getColumnModel().getColumn(1).setResizable(false);
+            bTable.getColumnModel().getColumn(2).setResizable(false);
+            bTable.getColumnModel().getColumn(3).setResizable(false);
+            bTable.getColumnModel().getColumn(4).setResizable(false);
+            bTable.getColumnModel().getColumn(5).setResizable(false);
+            bTable.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        jButton5.setText("View");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        fromBookMark.setText("View");
+        fromBookMark.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                fromBookMarkActionPerformed(evt);
             }
         });
 
@@ -584,9 +774,9 @@ public class TenantDashBoard extends javax.swing.JFrame {
                                 .addComponent(jLabel10))
                             .addGroup(bookMarkLayout.createSequentialGroup()
                                 .addGap(323, 323, 323)
-                                .addComponent(jButton2)
+                                .addComponent(undoBkBtn)
                                 .addGap(45, 45, 45)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(fromBookMark, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 421, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -597,11 +787,11 @@ public class TenantDashBoard extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
                 .addGroup(bookMarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton5))
+                    .addComponent(undoBkBtn)
+                    .addComponent(fromBookMark))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         parentPanel.add(bookMark, "card3");
@@ -616,7 +806,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
         );
         staysLayout.setVerticalGroup(
             staysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 845, Short.MAX_VALUE)
+            .addGap(0, 883, Short.MAX_VALUE)
         );
 
         parentPanel.add(stays, "card2");
@@ -709,25 +899,78 @@ public class TenantDashBoard extends javax.swing.JFrame {
 
     private void bookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookBtnActionPerformed
         // TODO add your handling code here:
-        CardLayout Cards = (CardLayout) parentPanel.getLayout();
+        DefaultTableModel dtm = (DefaultTableModel) bTable.getModel();
+        dtm.setRowCount(0);
 
-        Cards.show(parentPanel, "card3");
+        try {
+            List<BookMark> bk = Data.BookMarkList.getAllUserBookMark(Bus.system.getCurrentTenant().getUserId());
+            CardLayout Cards = (CardLayout) parentPanel.getLayout();
+            Cards.show(parentPanel, "card3");
+
+            if (bk != null) {
+                for (BookMark b : bk) {
+                    Property sr = b.getBookProperty();
+                    JLabel tempLabel = new JLabel();
+                    tempLabel.setIcon(new ImageIcon(sr.getpImage()));
+
+                    Object[] row = {tempLabel.getIcon(), b.getBookMarkId(), sr.getPropertyId(), sr.getPropertyName(), sr.getPropertyDesc(), sr.getpCharge(), sr.getAverageRating()};
+                    DefaultTableModel model = (DefaultTableModel) bTable.getModel();
+                    bTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
+                    DefaultTableModel Tmodel = (DefaultTableModel) bTable.getModel();
+
+                    // Tmodel.setValueAt(tempLabel.getIcon(), 0, 3);
+                    model.addRow(row);
+                }
+            } else {
+                printError("Notify", "No Book Mark exists");
+            }
+        } catch (Exception e) {
+            printError("Error", "Book Marks Can not be loaded");
+        }
 
     }//GEN-LAST:event_bookBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void fromPropBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromPropBtnActionPerformed
         // TODO add your handling code here:
+        currentProp =null;
         CardLayout Cards = (CardLayout) parentPanel.getLayout();
-
         Cards.show(parentPanel, "card5");
-    }//GEN-LAST:event_jButton3ActionPerformed
+        try {
+            int column = 1;
+            int row = pTable.getSelectedRow();
+            String value = pTable.getModel().getValueAt(row, column).toString();
+            currentProp = Data.PropertyList.getProperty(value);
+            if (currentProp!=null) {
+                this.showProperty(currentProp);
+            } else {
+                printError("Failure", "Booking Failed");
+            }
+        } catch (Exception e) {
+            printError("Error", "Booking Failed");
+        }
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+    }//GEN-LAST:event_fromPropBtnActionPerformed
+
+    private void fromBookMarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromBookMarkActionPerformed
+        
+           // TODO add your handling code here:
+        currentProp =null;
         CardLayout Cards = (CardLayout) parentPanel.getLayout();
-
         Cards.show(parentPanel, "card5");
-    }//GEN-LAST:event_jButton5ActionPerformed
+        try {
+            int column = 1;
+            int row = bTable.getSelectedRow();
+            String value = bTable.getModel().getValueAt(row, column).toString();
+            currentProp = Data.PropertyList.getProperty(Data.BookMarkList.getBookMark(value).getBookProperty().getPropertyId());
+            if (currentProp!=null) {
+                this.showProperty(currentProp);
+            } else {
+                printError("Failure", "Booking Failed");
+            }
+        } catch (Exception e) {
+            printError("Error", "Booking Failed");
+        }
+    }//GEN-LAST:event_fromBookMarkActionPerformed
 
     private void magnifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_magnifyBtnActionPerformed
         // TODO add your handling code here:
@@ -735,14 +978,19 @@ public class TenantDashBoard extends javax.swing.JFrame {
         dtm.setRowCount(0);
         try {
             String address = String.valueOf(jTextField1.getText());
-            String pt = String.valueOf(typeList.getSelectedValue());
-            List<String> res = resList.getSelectedValuesList();
-            List<String> fc = (List<String>) facList.getSelectedValuesList();
-            List<String> amen = amenList.getSelectedValuesList();
-            LocalDate s =frDateCh.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            LocalDate e =toDateCh.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (filterVisible) {
+                String pt = String.valueOf(typeList.getSelectedValue());
+                List<String> res = resList.getSelectedValuesList();
+                List<String> fc = (List<String>) facList.getSelectedValuesList();
+                List<String> amen = amenList.getSelectedValuesList();
+                LocalDate s = frDateCh.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate e = toDateCh.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                searchResult = Data.PropertyList.searchResult(address, pt, res, fc, amen, s, e);
+            } else {
+                searchResult = Data.PropertyList.searchResult(address, null, null, null, null, null, null);
 
-            searchResult = Data.PropertyList.searchResult(address, pt, res, fc, amen, s, e);
+            }
+
             try {
                 if (searchResult.isEmpty()) {
                     printError("Result ", "No such Property found");
@@ -757,9 +1005,9 @@ public class TenantDashBoard extends javax.swing.JFrame {
                         Object[] row = {tempLabel.getIcon(), sr.getPropertyId(), sr.getPropertyName(), sr.getPropertyDesc(), sr.getpCharge(), sr.getAverageRating()};
                         DefaultTableModel model = (DefaultTableModel) pTable.getModel();
                         pTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
-                        DefaultTableModel Tmodel = (DefaultTableModel) jTable1.getModel();
+                        DefaultTableModel Tmodel = (DefaultTableModel) bTable.getModel();
 
-                        Tmodel.setValueAt(tempLabel.getIcon(), 0, 3);
+                        // Tmodel.setValueAt(tempLabel.getIcon(), 0, 3);
                         model.addRow(row);
                     }
                 }
@@ -795,21 +1043,91 @@ public class TenantDashBoard extends javax.swing.JFrame {
 
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
+        if (!filterVisible) {
+            filterVisible = true;
 
+        } else {
+            filterVisible = false;
+        }
 
+        typeList.setVisible(filterVisible);
+        resList.setVisible(filterVisible);
+        facList.setVisible(filterVisible);
+        amenList.setVisible(filterVisible);
+        frDateCh.setVisible(filterVisible);
+        toDateCh.setVisible(filterVisible);
+        typeLabel.setVisible(filterVisible);
+        resLabel.setVisible(filterVisible);
+        amenLabel.setVisible(filterVisible);
+        facLabel.setVisible(filterVisible);
+        jLabel3.setVisible(filterVisible);
+        jLabel4.setVisible(filterVisible);
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void makeBkBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeBkBtnActionPerformed
         // TODO add your handling code here:
-       CardLayout Cards = (CardLayout) parentPanel.getLayout();
+        try {
+            int column = 1;
+            int row = pTable.getSelectedRow();
 
-        Cards.show(parentPanel, "card3");
-        int column = 1;
-        int row = pTable.getSelectedRow();
-        System.out.println(row);
-        String value = pTable.getModel().getValueAt(row, column).toString();
-    
+            String value = pTable.getModel().getValueAt(row, column).toString();
+            Bus.Property temp = Data.PropertyList.getProperty(value);
+            if (Bus.system.getCurrentTenant().makeBookMark(temp)) {
+                printError("Success", "Book Mark made");
+            } else {
+                printError("Failure", "Book Mark  not made");
+            }
+        } catch (Exception c) {
+            printError("Error", "Book Mark  Can  not be made");
+
+        }
+
+
     }//GEN-LAST:event_makeBkBtnActionPerformed
+
+    private void jRadioButton1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton1StateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jRadioButton1StateChanged
+
+    private void undoBkBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoBkBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            int column = 1;
+            int row = bTable.getSelectedRow();
+
+            String value = bTable.getModel().getValueAt(row, column).toString();
+
+            if (Data.BookMarkList.deleteBookMark(value)) {
+                printError("Success", "Book Mark deleted");
+                CardLayout Cards = (CardLayout) parentPanel.getLayout();
+                Cards.show(parentPanel, "card6");
+
+            } else {
+                printError("Failure", "Book Mark  not deleted");
+            }
+        } catch (Exception c) {
+            printError("Error", "Book Mark  Can  not be deleted");
+
+        }
+
+    }//GEN-LAST:event_undoBkBtnActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+                LocalDate s = frDateCh2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate e = toDateCh2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                //Integer.parseInt(jTextField6.getText());
+            Bus.system.currentTenant.requestBooking(currentProp,s, e);
+            printError("Success", "Success Requesting Book Mark");
+        }
+        catch(Exception e){
+            printError("Failure", "Failure Requesting Book Mark");
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
     private void printError(String d, String m) {
         JOptionPane optionPane = new JOptionPane(m, JOptionPane.ERROR_MESSAGE);
         JDialog dialog = optionPane.createDialog(d);
@@ -853,9 +1171,10 @@ public class TenantDashBoard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel AmenLabel;
     private javax.swing.JPanel allProperty;
+    private javax.swing.JLabel amenLabel;
     private javax.swing.JList<String> amenList;
+    private javax.swing.JTable bTable;
     private javax.swing.JButton backBtn;
     private javax.swing.JButton bookBtn;
     private javax.swing.JPanel bookMark;
@@ -865,15 +1184,27 @@ public class TenantDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel facLabel;
     private javax.swing.JList<String> facList;
     private com.toedter.calendar.JDateChooser frDateCh;
+    private com.toedter.calendar.JDateChooser frDateCh2;
+    private javax.swing.JButton fromBookMark;
+    private javax.swing.JButton fromPropBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
@@ -886,8 +1217,14 @@ public class TenantDashBoard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JButton magnifyBtn;
     private javax.swing.JButton makeBkBtn;
     private javax.swing.JLabel nameHolder;
@@ -903,7 +1240,9 @@ public class TenantDashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel stays;
     private javax.swing.JPanel tenantView;
     private com.toedter.calendar.JDateChooser toDateCh;
+    private com.toedter.calendar.JDateChooser toDateCh2;
     private javax.swing.JLabel typeLabel;
     private javax.swing.JList<String> typeList;
+    private javax.swing.JButton undoBkBtn;
     // End of variables declaration//GEN-END:variables
 }

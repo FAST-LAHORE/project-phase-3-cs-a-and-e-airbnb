@@ -42,6 +42,7 @@ public class system implements Serializable {
           Tenant my = new Tenant("Nashit", IdGen.getInstance().genUserId(), "123","img/icon.png", "123", "n@gmail.com", "123");
           Data.TenantList.addTenant(my);
           currentTenant = my;
+//        dummyProperty();
           new Gui.TenantDashBoard().setVisible(true);
         
 
@@ -64,7 +65,22 @@ public class system implements Serializable {
         a1.addDate("2018-12-10");
         a1.addDate("2018-11-10");
         Data.PropertyList.addProperty(a1);
-
+        
+         a1.setPropertyName("nashit");
+        a1.setpImage("img/cross.png");
+        
+        a1.setPropertyId(IdGen.getInstance().genPropertyId());
+       
+        a1.getpFacilities().add("Gym");
+        a1.getpAmenities().add("Family");
+        a1.getpAmenities().add("Kitchen");
+        a1.getpRestrictions().add("Curfew");
+        a1.getpRestrictions().add(Bus.Restrictions.No_Party.toString());
+        a1.setPropertyAdd("lhr");
+        a1.setpType(PropertyType.Room);
+        a1.addDate("2018-12-10");
+        a1.addDate("2018-11-10");
+        Data.PropertyList.addProperty(a1);
         a1 = new Property();
         a1.setPropertyId(IdGen.getInstance().genPropertyId());
         
