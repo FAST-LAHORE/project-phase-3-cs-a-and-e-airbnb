@@ -23,8 +23,14 @@ public class Tenant extends User implements Serializable {
     
     // Out of 10
     Float Rating;
-    
-    
+
+    public List<BookMark> getMyBookMarks() {
+        return myBookMarks;
+    }
+
+    public List<Stay> getPastStays() {
+        return pastStays;
+    }
     
     Boolean requestBooking(Property p){
         throw new UnsupportedOperationException();
