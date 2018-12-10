@@ -365,7 +365,7 @@
                     </DimensionLayout>
                   </Layout>
                 </Container>
-                <Container class="javax.swing.JPanel" name="propertyView">
+                <Container class="javax.swing.JPanel" name="Landlord">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
                       <CardConstraints cardName="card5"/>

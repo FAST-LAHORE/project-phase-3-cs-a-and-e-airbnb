@@ -5,6 +5,9 @@
  */
 package Gui;
 
+import Bus.LandLord;
+import javax.swing.JRootPane;
+
 /**
  *
  * @author Abbas
@@ -16,7 +19,22 @@ public class ViewLandlord extends javax.swing.JFrame {
      */
     private int count = 0;
     public ViewLandlord() {
+        setUndecorated(true);
+        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         initComponents();
+        parentPanel.removeAll();
+        parentPanel.add(Landlord);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+    }
+    
+    public ViewLandlord(LandLord L)
+    {
+        jTextField1.setText(L.getName());
+        jTextField2.setText(L.getEmail());
+        jTextField3.setText(L.getUserId());
+        jTextField4.setText(L.getPhone());
+        jTextField5.setText(L.getSecurity());
     }
 
     /**
@@ -46,7 +64,7 @@ public class ViewLandlord extends javax.swing.JFrame {
         search = new javax.swing.JPanel();
         bookMark = new javax.swing.JPanel();
         stays = new javax.swing.JPanel();
-        propertyView = new javax.swing.JPanel();
+        Landlord = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
@@ -256,13 +274,13 @@ public class ViewLandlord extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout propertyViewLayout = new javax.swing.GroupLayout(propertyView);
-        propertyView.setLayout(propertyViewLayout);
-        propertyViewLayout.setHorizontalGroup(
-            propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(propertyViewLayout.createSequentialGroup()
+        javax.swing.GroupLayout LandlordLayout = new javax.swing.GroupLayout(Landlord);
+        Landlord.setLayout(LandlordLayout);
+        LandlordLayout.setHorizontalGroup(
+            LandlordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LandlordLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(LandlordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
@@ -270,7 +288,7 @@ public class ViewLandlord extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addGap(102, 102, 102)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(LandlordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,37 +297,37 @@ public class ViewLandlord extends javax.swing.JFrame {
                     .addComponent(jTextField6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        propertyViewLayout.setVerticalGroup(
-            propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(propertyViewLayout.createSequentialGroup()
+        LandlordLayout.setVerticalGroup(
+            LandlordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LandlordLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(LandlordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(LandlordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(27, 27, 27)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(LandlordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(LandlordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(26, 26, 26)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(LandlordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(LandlordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(171, Short.MAX_VALUE))
         );
 
-        parentPanel.add(propertyView, "card5");
+        parentPanel.add(Landlord, "card5");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -442,6 +460,7 @@ public class ViewLandlord extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Landlord;
     private javax.swing.JButton backBtn;
     private javax.swing.JButton bookBtn;
     private javax.swing.JPanel bookMark;
@@ -467,7 +486,6 @@ public class ViewLandlord extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel nameHolder;
     private javax.swing.JPanel parentPanel;
-    private javax.swing.JPanel propertyView;
     private javax.swing.JPanel search;
     private javax.swing.JButton searchBtn;
     private javax.swing.JButton signoutBtn;

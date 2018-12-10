@@ -42,4 +42,8 @@ public class LandLord extends User implements Serializable {
     public Boolean fileReport(Tenant t){
         throw new UnsupportedOperationException();
     }
+    public String getSecurity()
+    {
+        return this.sClearance;
+    }
 }
