@@ -96,8 +96,6 @@ public class TenantDashBoard extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\hp\\Documents\\NetBeansProjects\\AirBnB\\img\\icon.jpg")); // NOI18N
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -119,14 +117,12 @@ public class TenantDashBoard extends javax.swing.JFrame {
         nameHolder.setForeground(new java.awt.Color(255, 255, 255));
         nameHolder.setText("         ");
 
-        backBtn.setIcon(new javax.swing.ImageIcon("C:\\Users\\hp\\Documents\\NetBeansProjects\\AirBnB\\img\\back.png")); // NOI18N
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backBtnActionPerformed(evt);
             }
         });
 
-        exitBtn.setIcon(new javax.swing.ImageIcon("C:\\Users\\hp\\Documents\\NetBeansProjects\\AirBnB\\img\\cross.png")); // NOI18N
         exitBtn.setText(" ");
         exitBtn.setBorderPainted(false);
         exitBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +171,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
             }
         });
 
-        editBtn.setText("Edit");
+        editBtn.setText("Edit Profile");
 
         signoutBtn.setText("Sign Out");
 
@@ -284,7 +280,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(parentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1021, Short.MAX_VALUE))
+                    .addComponent(parentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(

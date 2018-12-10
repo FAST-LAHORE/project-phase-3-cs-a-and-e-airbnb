@@ -13,6 +13,8 @@ import java.io.Serializable;
  */
 public class Admin  extends User implements Serializable {
 
+    String name, userId, nationalId, picture, phone, email, password;
+    Admin a = new Admin(name, userId, nationalId, picture, phone, email, password);
     public Admin(String name, String userId, String nationalId, String picture) {
         super(name, userId, nationalId, picture);
     }
@@ -30,4 +32,8 @@ public class Admin  extends User implements Serializable {
         super(name, userId, nationalId, picture, phone, email, password);
     }
         
+    public void getInstance (String name,String userId,String nationalId,String picture,String phone,String email,String password,Admin admin)
+    {
+        admin = this.a;
+    }
 }
