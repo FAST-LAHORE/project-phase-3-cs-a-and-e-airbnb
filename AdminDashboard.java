@@ -10,7 +10,7 @@ import javax.swing.JRootPane;
 
 /**
  *
- * @author Zulqarnain Abbas
+ * @author Sajjad Hussain
  */
 public class AdminDashboard extends javax.swing.JFrame {
 
@@ -18,7 +18,7 @@ public class AdminDashboard extends javax.swing.JFrame {
      * Creates new form AdminDashboard
      */
     
-        private int count = 0;
+     private int count = 0;
     public AdminDashboard()  {
         setUndecorated(true);
         getRootPane().setWindowDecorationStyle(JRootPane.NONE);
@@ -29,7 +29,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         parentPanel.removeAll();
     }
 
-    public AdminDashboard(Bus.Tenant c)  {
+    public AdminDashboard(Bus.Admin c)  {
         setUndecorated(true);
         getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
@@ -38,17 +38,14 @@ public class AdminDashboard extends javax.swing.JFrame {
         
         parentPanel.removeAll();
     }
-    private void addPanel(JPanel myP) {
+    
+      private void addPanel(JPanel myP) {
         parentPanel.add(myP);
         count++;
         parentPanel.repaint();
         parentPanel.revalidate();
         
     }
-    
-//    public AdminDashboard() {
-//        initComponents();
-//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,11 +71,13 @@ public class AdminDashboard extends javax.swing.JFrame {
         searchBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         signoutBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         parentPanel = new javax.swing.JPanel();
         propertyView = new javax.swing.JPanel();
         search = new javax.swing.JPanel();
         bookMark = new javax.swing.JPanel();
         stays = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,39 +149,52 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(255, 102, 102));
 
-        bookBtn.setText("View Reports");
+        bookBtn.setText("View Stays");
 
-        stayBtn.setText("Delete Reports");
+        stayBtn.setText("End Stay");
 
-        searchBtn.setText("Filter Reports");
+        searchBtn.setText("View Property");
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBtnActionPerformed(evt);
             }
         });
 
-        editBtn.setText("Ban User");
+        editBtn.setText("Edit Profile");
 
         signoutBtn.setText("Sign Out");
+
+        jButton1.setText("Post Property");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(bookBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(stayBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(signoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(bookBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(stayBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(signoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(20, 20, 20))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
+                .addGap(85, 85, 85)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
                 .addComponent(bookBtn)
                 .addGap(48, 48, 48)
                 .addComponent(stayBtn)
@@ -192,7 +204,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                 .addComponent(editBtn)
                 .addGap(41, 41, 41)
                 .addComponent(signoutBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         parentPanel.setBackground(new java.awt.Color(102, 102, 102));
@@ -204,11 +216,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         propertyView.setLayout(propertyViewLayout);
         propertyViewLayout.setHorizontalGroup(
             propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 654, Short.MAX_VALUE)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
         propertyViewLayout.setVerticalGroup(
             propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
         parentPanel.add(propertyView, "card5");
@@ -219,11 +231,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         search.setLayout(searchLayout);
         searchLayout.setHorizontalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 654, Short.MAX_VALUE)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
         searchLayout.setVerticalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
         parentPanel.add(search, "card4");
@@ -234,11 +246,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         bookMark.setLayout(bookMarkLayout);
         bookMarkLayout.setHorizontalGroup(
             bookMarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 654, Short.MAX_VALUE)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
         bookMarkLayout.setVerticalGroup(
             bookMarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
         parentPanel.add(bookMark, "card3");
@@ -249,14 +261,27 @@ public class AdminDashboard extends javax.swing.JFrame {
         stays.setLayout(staysLayout);
         staysLayout.setHorizontalGroup(
             staysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 654, Short.MAX_VALUE)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
         staysLayout.setVerticalGroup(
             staysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 552, Short.MAX_VALUE)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
         parentPanel.add(stays, "card2");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 679, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 554, Short.MAX_VALUE)
+        );
+
+        parentPanel.add(jPanel3, "card6");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -339,9 +364,12 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         // TODO add your handling code here:
-        addPanel(search);
-
+        addPanel(jPanel3);
     }//GEN-LAST:event_searchBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -384,11 +412,13 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel bookMark;
     private javax.swing.JButton editBtn;
     private javax.swing.JButton exitBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel nameHolder;
