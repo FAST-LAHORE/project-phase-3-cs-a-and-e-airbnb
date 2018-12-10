@@ -556,6 +556,7 @@ public class LandLordDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        String abc;
         String n,c,i,d;
         n=jTextField1.getText();
         c=jTextField2.getText();
