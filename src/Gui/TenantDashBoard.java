@@ -5,6 +5,11 @@
  */
 package Gui;
 
+import Bus.BookMark;
+import Bus.Stay;
+import Bus.Tenant;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.UIManager;
@@ -21,13 +26,12 @@ public class TenantDashBoard extends javax.swing.JFrame {
      * Creates new form TenantDashBoard
      */
     private int count = 0;
+    Tenant t;
     public TenantDashBoard()  {
         setUndecorated(true);
         getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
-        initComponents();
-        
-        
+        initComponents();        
         parentPanel.removeAll();
     }
 
@@ -36,6 +40,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
         getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
         initComponents();
+        this.t = c;
         nameHolder.setText(c.getName());
         
         parentPanel.removeAll();
@@ -105,7 +110,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
         jPasswordField1 = new javax.swing.JPasswordField();
-        jLabel14 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dash Board");
@@ -321,8 +326,12 @@ public class TenantDashBoard extends javax.swing.JFrame {
 
         jLabel13.setText("Address:");
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel14.setText("Stay List:");
+        jButton1.setText("Save Change");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout editLayout = new javax.swing.GroupLayout(edit);
         edit.setLayout(editLayout);
@@ -330,57 +339,60 @@ public class TenantDashBoard extends javax.swing.JFrame {
             editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editLayout.createSequentialGroup()
                 .addGap(101, 101, 101)
-                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
+                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3)
                     .addGroup(editLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                    .addGroup(editLayout.createSequentialGroup()
+                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(34, 34, 34)
                         .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3)
+                            .addComponent(jTextField1)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))
+                    .addGroup(editLayout.createSequentialGroup()
+                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField4))))
+                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(editLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9)
+                                .addGroup(editLayout.createSequentialGroup()
+                                    .addGap(66, 66, 66)
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(editLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(editLayout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                            .addGroup(editLayout.createSequentialGroup()
-                                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(34, 34, 34)
-                                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))
-                            .addGroup(editLayout.createSequentialGroup()
-                                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel7))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField4))))
-                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(editLayout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel9)
-                                        .addGroup(editLayout.createSequentialGroup()
-                                            .addGap(66, 66, 66)
-                                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(editLayout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(editLayout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel11))))))
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel11))))
                 .addContainerGap(140, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         editLayout.setVerticalGroup(
             editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(editLayout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(29, 29, 29)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel9))
@@ -416,9 +428,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(43, 43, 43)
-                .addComponent(jLabel14)
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
 
         parentPanel.add(edit, "card6");
@@ -450,7 +460,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(parentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 661, Short.MAX_VALUE)))
+                        .addComponent(parentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -515,6 +525,89 @@ public class TenantDashBoard extends javax.swing.JFrame {
         addPanel(edit);
     }//GEN-LAST:event_editBtnActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String name,CNIC,contact,email,pass,currency,education,address; 
+        name = jTextField1.getText();
+        if ("".equals(name))
+        {
+            JOptionPane.showMessageDialog(jButton1, "Invalid email address");
+        }
+        else
+        {
+            CNIC = jTextField2.getText();
+            if (CNIC.equals(""))
+            {
+                JOptionPane.showMessageDialog(jButton1, "Invalid CNIC");
+            }
+            else 
+            {
+                contact = jTextField3.getText();
+                if (contact.equals(""))
+                {
+                    JOptionPane.showMessageDialog(jButton1, "Invalid contact no");
+                }
+                else 
+                {
+                    email = jTextField4.getText();
+                    if (email.equals(""))
+                    {
+                        JOptionPane.showMessageDialog(jButton1, "Invalid email address");
+                    }
+                    else if (email.indexOf("@")>0 && email.indexOf(".com")>0 && email.endsWith(".com")==true)
+                    {
+                        pass = jPasswordField1.getText();
+                        if (pass.equals(""))
+                        {
+                            JOptionPane.showMessageDialog(jButton1, "Invalid Password");
+                        }
+                        else 
+                        {
+                            currency = jComboBox1.getSelectedItem().toString();
+                            if (currency.equals(""))
+                            {
+                                JOptionPane.showMessageDialog(jButton1, "Select Currency");
+                            }
+                            else 
+                            {
+                                education  = jTextField6.getText();
+                                if (education.equals(""))
+                                {
+                                    JOptionPane.showMessageDialog(jButton1, "Enter Education");
+                                }
+                                else 
+                                {
+                                    address = jTextField7.getText();
+                                    if (address.equals(""))
+                                    {
+                                        JOptionPane.showMessageDialog(jButton1, "Enter Valid address");
+                                    }
+                                    else 
+                                    {
+                                        t.setName(name);
+                                        t.setCurrency(currency);
+                                        t.setAddress(address);
+                                        t.setEmail(email);
+                                        t.setNationalId(CNIC);
+                                        t.setPassword(pass);
+                                        t.setPhone(contact);
+                                        t.setEducation(education);
+                                        JOptionPane.showMessageDialog(jButton1, "Tenant Updated!");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(jButton1, "Invalid email address");
+                    }
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -557,13 +650,13 @@ public class TenantDashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel edit;
     private javax.swing.JButton editBtn;
     private javax.swing.JButton exitBtn;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

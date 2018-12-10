@@ -20,6 +20,7 @@ public class User implements Serializable {
     
     String email;
     String password;
+    String status = "ok";
 
     public User(String name, String userId, String nationalId, String picture, String phone, String email, String password) {
         this.name = name;
@@ -33,7 +34,7 @@ public class User implements Serializable {
     
     // Active or Inactive
     public String getStatus()  {
-        throw new java.lang.UnsupportedOperationException("Not supported yet.");
+        return this.status;
     }
 
     public User(String name, String userId, String nationalId, String picture) {
@@ -43,6 +44,10 @@ public class User implements Serializable {
         this.picture = picture;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
     public String getPhone() {
         return phone;
     }
