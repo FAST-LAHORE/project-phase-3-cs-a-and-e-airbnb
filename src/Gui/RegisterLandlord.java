@@ -392,6 +392,11 @@ public class RegisterLandlord extends javax.swing.JFrame {
             //Logger.getLogger(portal.class.getName()).log(Level.SEVERE, null, ex);
             
         }*/
+       String email=jTextField3.getText();
+       String name=jTextField1.getText();
+       String userid=jTextField2.getText();
+       String pass=jPasswordField1.getText();
+       String security=jTextField3.getText();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
