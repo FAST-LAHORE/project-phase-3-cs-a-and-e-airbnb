@@ -31,7 +31,7 @@ public class system implements Serializable {
           Tenant my = new Tenant("Nashit", IdGen.getInstance().genUserId(), "123","img/icon.png", "123", "n@gmail.com", "123");
           Data.TenantList.addTenant(my);
           currentTenant = my;
-       dummyProperty();
+          dummyProperty();
           new Gui.TenantDashBoard().setVisible(true);
         
 

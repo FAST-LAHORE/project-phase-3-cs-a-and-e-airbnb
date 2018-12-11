@@ -16,6 +16,8 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
@@ -117,6 +119,10 @@ public class TenantDashBoard extends javax.swing.JFrame {
         signoutBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         parentPanel = new javax.swing.JPanel();
+        bookingView = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        bgTable = new javax.swing.JTable();
         allProperty = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -278,6 +284,11 @@ public class TenantDashBoard extends javax.swing.JFrame {
         });
 
         jButton1.setText("Bookings ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout btnPanelLayout = new javax.swing.GroupLayout(btnPanel);
         btnPanel.setLayout(btnPanelLayout);
@@ -316,6 +327,60 @@ public class TenantDashBoard extends javax.swing.JFrame {
         parentPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.white, java.awt.Color.black, null, null));
         parentPanel.setAutoscrolls(true);
         parentPanel.setLayout(new java.awt.CardLayout());
+
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel17.setText("Bookings: ");
+
+        bgTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Booking Id", "Property Id", "Status", "Start Date", "End Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(bgTable);
+        if (bgTable.getColumnModel().getColumnCount() > 0) {
+            bgTable.getColumnModel().getColumn(0).setResizable(false);
+            bgTable.getColumnModel().getColumn(1).setResizable(false);
+            bgTable.getColumnModel().getColumn(2).setResizable(false);
+            bgTable.getColumnModel().getColumn(3).setResizable(false);
+            bgTable.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        javax.swing.GroupLayout bookingViewLayout = new javax.swing.GroupLayout(bookingView);
+        bookingView.setLayout(bookingViewLayout);
+        bookingViewLayout.setHorizontalGroup(
+            bookingViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookingViewLayout.createSequentialGroup()
+                .addGroup(bookingViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bookingViewLayout.createSequentialGroup()
+                        .addGap(437, 437, 437)
+                        .addComponent(jLabel17))
+                    .addGroup(bookingViewLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(83, Short.MAX_VALUE))
+        );
+        bookingViewLayout.setVerticalGroup(
+            bookingViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookingViewLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel17)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(397, Short.MAX_VALUE))
+        );
+
+        parentPanel.add(bookingView, "card8");
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel9.setText("Properties:");
@@ -502,10 +567,11 @@ public class TenantDashBoard extends javax.swing.JFrame {
                             .addComponent(frDateCh2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(propertyViewLayout.createSequentialGroup()
-                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         propertyViewLayout.setVerticalGroup(
             propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -559,7 +625,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
                 .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         parentPanel.add(propertyView, "card5");
@@ -1134,6 +1200,38 @@ public class TenantDashBoard extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        List<Booking> result = null;
+          DefaultTableModel dtm = (DefaultTableModel) bgTable.getModel();
+        dtm.setRowCount(0);
+        try {
+            // TODO add your handling code here:
+            result = Data.BookingList.getAllTenantBookings(Bus.system.getCurrentTenant().getUserId());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TenantDashBoard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+                if ( result == null) {
+                    printError("Result ", "No such Booking found");
+
+                } else {
+                    CardLayout Cards = (CardLayout) parentPanel.getLayout();
+                    Cards.show(parentPanel, "card8");
+                    for (Booking sr : result) {
+                        
+
+                        Object[] row = {sr.getBookingId(),sr.getbProperty().getPropertyId(),sr.getStatus(),sr.getsDate(),sr.geteDate()};
+                        DefaultTableModel model = (DefaultTableModel) bgTable.getModel();
+                       
+                        // Tmodel.setValueAt(tempLabel.getIcon(), 0, 3);
+                        model.addRow(row);
+                    }
+                }
+            } catch (Exception e1) {
+                printError("Error", "Display Error Contact Suppport");
+            }
+    }//GEN-LAST:event_jButton1ActionPerformed
     private void printError(String d, String m) {
         JOptionPane optionPane = new JOptionPane(m, JOptionPane.ERROR_MESSAGE);
         JDialog dialog = optionPane.createDialog(d);
@@ -1182,8 +1280,10 @@ public class TenantDashBoard extends javax.swing.JFrame {
     private javax.swing.JList<String> amenList;
     private javax.swing.JTable bTable;
     private javax.swing.JButton backBtn;
+    private javax.swing.JTable bgTable;
     private javax.swing.JButton bookBtn;
     private javax.swing.JPanel bookMark;
+    private javax.swing.JPanel bookingView;
     private javax.swing.JPanel btnPanel;
     private javax.swing.JButton editBtn;
     private javax.swing.JButton exitBtn;
@@ -1204,6 +1304,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1224,6 +1325,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
