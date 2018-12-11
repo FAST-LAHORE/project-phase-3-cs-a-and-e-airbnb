@@ -5,13 +5,6 @@
  */
 package Gui;
 
-import Bus.LandLord;
-import Bus.Report;
-import Bus.Tenant;
-import Data.ReportList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 
@@ -73,69 +66,18 @@ public class AdminDashboard extends javax.swing.JFrame {
         backBtn = new javax.swing.JButton();
         exitBtn = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
-        reviewBtn = new javax.swing.JButton();
+        bookBtn = new javax.swing.JButton();
         stayBtn = new javax.swing.JButton();
         searchBtn = new javax.swing.JButton();
+        editBtn = new javax.swing.JButton();
         signoutBtn = new javax.swing.JButton();
-        parentPanel = new javax.swing.JPanel();
-        signOut = new javax.swing.JPanel();
-        banUser = new javax.swing.JPanel();
-        reviewReport2 = new javax.swing.JPanel();
-        jLabel37 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
-        jLabel39 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
-        jLabel53 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
-        jLabel42 = new javax.swing.JLabel();
-        deleteReport = new javax.swing.JPanel();
-        reviewReport1 = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jLabel36 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        reviewReport = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jLabel19 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        parentPanel = new javax.swing.JPanel();
+        propertyView = new javax.swing.JPanel();
+        search = new javax.swing.JPanel();
+        bookMark = new javax.swing.JPanel();
+        stays = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -207,31 +149,25 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(255, 102, 102));
 
-        reviewBtn.setText("Review Report");
-        reviewBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reviewBtnActionPerformed(evt);
-            }
-        });
+        bookBtn.setText("View Stays");
 
-        stayBtn.setText("Delete Rreport");
-        stayBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stayBtnActionPerformed(evt);
-            }
-        });
+        stayBtn.setText("End Stay");
 
-        searchBtn.setText("Ban User");
+        searchBtn.setText("View Property");
         searchBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchBtnActionPerformed(evt);
             }
         });
 
+        editBtn.setText("Edit Profile");
+
         signoutBtn.setText("Sign Out");
-        signoutBtn.addActionListener(new java.awt.event.ActionListener() {
+
+        jButton1.setText("Post Property");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signoutBtnActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -239,32 +175,36 @@ public class AdminDashboard extends javax.swing.JFrame {
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(reviewBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bookBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(stayBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(20, 20, 20))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(signoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(signoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(20, 20, 20))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(reviewBtn)
-                .addGap(57, 57, 57)
+                .addGap(85, 85, 85)
+                .addComponent(jButton1)
+                .addGap(18, 18, 18)
+                .addComponent(bookBtn)
+                .addGap(48, 48, 48)
                 .addComponent(stayBtn)
-                .addGap(56, 56, 56)
+                .addGap(48, 48, 48)
                 .addComponent(searchBtn)
-                .addGap(68, 68, 68)
+                .addGap(43, 43, 43)
+                .addComponent(editBtn)
+                .addGap(41, 41, 41)
                 .addComponent(signoutBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         parentPanel.setBackground(new java.awt.Color(102, 102, 102));
@@ -272,487 +212,76 @@ public class AdminDashboard extends javax.swing.JFrame {
         parentPanel.setAutoscrolls(true);
         parentPanel.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout signOutLayout = new javax.swing.GroupLayout(signOut);
-        signOut.setLayout(signOutLayout);
-        signOutLayout.setHorizontalGroup(
-            signOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 692, Short.MAX_VALUE)
+        javax.swing.GroupLayout propertyViewLayout = new javax.swing.GroupLayout(propertyView);
+        propertyView.setLayout(propertyViewLayout);
+        propertyViewLayout.setHorizontalGroup(
+            propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
-        signOutLayout.setVerticalGroup(
-            signOutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 607, Short.MAX_VALUE)
-        );
-
-        parentPanel.add(signOut, "card5");
-
-        jLabel37.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel37.setText("Detail of Report:");
-
-        jLabel38.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel38.setText("User ID");
-
-        jLabel39.setText("jLabel5");
-
-        jLabel40.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel40.setText("Name:");
-
-        jLabel41.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel41.setText("Status:");
-
-        jLabel45.setText("jLabel11");
-
-        jLabel46.setText("jLabel12");
-
-        jButton5.setText("Ban");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jLabel53.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel53.setText("Enter ID of User");
-
-        jButton6.setText("Search");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jLabel42.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel42.setText("User");
-
-        javax.swing.GroupLayout reviewReport2Layout = new javax.swing.GroupLayout(reviewReport2);
-        reviewReport2.setLayout(reviewReport2Layout);
-        reviewReport2Layout.setHorizontalGroup(
-            reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reviewReport2Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(reviewReport2Layout.createSequentialGroup()
-                        .addComponent(jLabel53)
-                        .addGap(35, 35, 35)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(reviewReport2Layout.createSequentialGroup()
-                        .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel37)
-                            .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(reviewReport2Layout.createSequentialGroup()
-                                    .addComponent(jLabel41)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel46))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, reviewReport2Layout.createSequentialGroup()
-                                    .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel40)
-                                        .addComponent(jLabel38))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
-                                    .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel45, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel39, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                        .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(reviewReport2Layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reviewReport2Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(109, 109, 109))
-                                    .addGroup(reviewReport2Layout.createSequentialGroup()
-                                        .addGap(199, 199, 199)
-                                        .addComponent(jButton6)
-                                        .addContainerGap(82, Short.MAX_VALUE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reviewReport2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel42)
-                                .addGap(148, 148, 148))))))
-        );
-        reviewReport2Layout.setVerticalGroup(
-            reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reviewReport2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel53)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6))
-                .addGap(29, 29, 29)
-                .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel37)
-                    .addComponent(jLabel42))
-                .addGap(37, 37, 37)
-                .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel38)
-                    .addComponent(jLabel39))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel40)
-                    .addComponent(jLabel45))
-                .addGap(18, 18, 18)
-                .addGroup(reviewReport2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel46)
-                    .addComponent(jLabel41))
-                .addGap(100, 100, 100)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(177, 177, 177))
+        propertyViewLayout.setVerticalGroup(
+            propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout banUserLayout = new javax.swing.GroupLayout(banUser);
-        banUser.setLayout(banUserLayout);
-        banUserLayout.setHorizontalGroup(
-            banUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 692, Short.MAX_VALUE)
-            .addGroup(banUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(banUserLayout.createSequentialGroup()
-                    .addGap(0, 9, Short.MAX_VALUE)
-                    .addComponent(reviewReport2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 10, Short.MAX_VALUE)))
+        parentPanel.add(propertyView, "card5");
+
+        search.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
+        search.setLayout(searchLayout);
+        searchLayout.setHorizontalGroup(
+            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
-        banUserLayout.setVerticalGroup(
-            banUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 607, Short.MAX_VALUE)
-            .addGroup(banUserLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(banUserLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(reviewReport2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+        searchLayout.setVerticalGroup(
+            searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
-        parentPanel.add(banUser, "card3");
+        parentPanel.add(search, "card4");
 
-        jLabel20.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel20.setText("Detail of Report:");
+        bookMark.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel21.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel21.setText("Report ID");
-
-        jLabel22.setText("jLabel5");
-
-        jLabel23.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel23.setText("Filer Name:");
-
-        jLabel24.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel24.setText("Status:");
-
-        jLabel25.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel25.setText("Description:");
-
-        jLabel26.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel26.setText("About Stay:");
-
-        jLabel27.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel27.setText("Booking ID");
-
-        jLabel28.setText("jLabel11");
-
-        jLabel29.setText("jLabel12");
-
-        jLabel30.setText("jLabel13");
-
-        jLabel31.setText("jLabel14");
-
-        jLabel32.setText("jLabel15");
-
-        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel33.setText("Start Date");
-
-        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel34.setText("Stay Status");
-
-        jLabel35.setText("jLabel16");
-
-        jButton3.setText("Delete");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jLabel36.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel36.setText("Enter ID of Report");
-
-        jButton4.setText("Search");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout reviewReport1Layout = new javax.swing.GroupLayout(reviewReport1);
-        reviewReport1.setLayout(reviewReport1Layout);
-        reviewReport1Layout.setHorizontalGroup(
-            reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reviewReport1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(reviewReport1Layout.createSequentialGroup()
-                        .addComponent(jLabel36)
-                        .addGap(35, 35, 35)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(reviewReport1Layout.createSequentialGroup()
-                        .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel20)
-                            .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(reviewReport1Layout.createSequentialGroup()
-                                    .addComponent(jLabel25)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
-                                    .addComponent(jLabel30))
-                                .addGroup(reviewReport1Layout.createSequentialGroup()
-                                    .addComponent(jLabel24)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel29))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, reviewReport1Layout.createSequentialGroup()
-                                    .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel23)
-                                        .addComponent(jLabel21))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                        .addGap(57, 57, 57)
-                        .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reviewReport1Layout.createSequentialGroup()
-                                .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(reviewReport1Layout.createSequentialGroup()
-                                        .addComponent(jLabel27)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel31))
-                                    .addGroup(reviewReport1Layout.createSequentialGroup()
-                                        .addComponent(jLabel33)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel32))
-                                    .addGroup(reviewReport1Layout.createSequentialGroup()
-                                        .addComponent(jLabel34)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel35))
-                                    .addGroup(reviewReport1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(109, 109, 109))
-                            .addGroup(reviewReport1Layout.createSequentialGroup()
-                                .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel26)
-                                    .addGroup(reviewReport1Layout.createSequentialGroup()
-                                        .addGap(199, 199, 199)
-                                        .addComponent(jButton4)))
-                                .addContainerGap(82, Short.MAX_VALUE))))))
+        javax.swing.GroupLayout bookMarkLayout = new javax.swing.GroupLayout(bookMark);
+        bookMark.setLayout(bookMarkLayout);
+        bookMarkLayout.setHorizontalGroup(
+            bookMarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
-        reviewReport1Layout.setVerticalGroup(
-            reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reviewReport1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel36)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4))
-                .addGap(29, 29, 29)
-                .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel26))
-                .addGap(37, 37, 37)
-                .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel21)
-                    .addComponent(jLabel22)
-                    .addComponent(jLabel27)
-                    .addComponent(jLabel31))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel23)
-                    .addComponent(jLabel28)
-                    .addComponent(jLabel33)
-                    .addComponent(jLabel32))
-                .addGap(31, 31, 31)
-                .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel29)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel34)
-                    .addComponent(jLabel35))
-                .addGap(30, 30, 30)
-                .addGroup(reviewReport1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25)
-                    .addComponent(jLabel30))
-                .addGap(53, 53, 53)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(177, 177, 177))
+        bookMarkLayout.setVerticalGroup(
+            bookMarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout deleteReportLayout = new javax.swing.GroupLayout(deleteReport);
-        deleteReport.setLayout(deleteReportLayout);
-        deleteReportLayout.setHorizontalGroup(
-            deleteReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 692, Short.MAX_VALUE)
-            .addGroup(deleteReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(deleteReportLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(reviewReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+        parentPanel.add(bookMark, "card3");
+
+        stays.setBackground(new java.awt.Color(102, 102, 102));
+
+        javax.swing.GroupLayout staysLayout = new javax.swing.GroupLayout(stays);
+        stays.setLayout(staysLayout);
+        staysLayout.setHorizontalGroup(
+            staysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
-        deleteReportLayout.setVerticalGroup(
-            deleteReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 607, Short.MAX_VALUE)
-            .addGroup(deleteReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(deleteReportLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(reviewReport1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+        staysLayout.setVerticalGroup(
+            staysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
-        parentPanel.add(deleteReport, "card2");
+        parentPanel.add(stays, "card2");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Detail of Report:");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel4.setText("Report ID");
-
-        jLabel5.setText("jLabel5");
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel6.setText("Filer Name:");
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel7.setText("Status:");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Description:");
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel9.setText("About Stay:");
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Booking ID");
-
-        jLabel11.setText("jLabel11");
-
-        jLabel12.setText("jLabel12");
-
-        jLabel13.setText("jLabel13");
-
-        jLabel14.setText("jLabel14");
-
-        jLabel15.setText("jLabel15");
-
-        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel17.setText("Start Date");
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel18.setText("Stay Status");
-
-        jLabel16.setText("jLabel16");
-
-        jButton1.setText("Take Action");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel19.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel19.setText("Enter ID of Report");
-
-        jButton2.setText("Review");
-
-        javax.swing.GroupLayout reviewReportLayout = new javax.swing.GroupLayout(reviewReport);
-        reviewReport.setLayout(reviewReportLayout);
-        reviewReportLayout.setHorizontalGroup(
-            reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reviewReportLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(reviewReportLayout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGap(35, 35, 35)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(reviewReportLayout.createSequentialGroup()
-                        .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(reviewReportLayout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
-                                    .addComponent(jLabel13))
-                                .addGroup(reviewReportLayout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel12))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, reviewReportLayout.createSequentialGroup()
-                                    .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6)
-                                        .addComponent(jLabel4))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)))))
-                        .addGap(57, 57, 57)
-                        .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reviewReportLayout.createSequentialGroup()
-                                .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(reviewReportLayout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel14))
-                                    .addGroup(reviewReportLayout.createSequentialGroup()
-                                        .addComponent(jLabel17)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel15))
-                                    .addGroup(reviewReportLayout.createSequentialGroup()
-                                        .addComponent(jLabel18)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel16))
-                                    .addGroup(reviewReportLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(109, 109, 109))
-                            .addGroup(reviewReportLayout.createSequentialGroup()
-                                .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addGroup(reviewReportLayout.createSequentialGroup()
-                                        .addGap(199, 199, 199)
-                                        .addComponent(jButton2)))
-                                .addContainerGap(99, Short.MAX_VALUE))))))
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 679, Short.MAX_VALUE)
         );
-        reviewReportLayout.setVerticalGroup(
-            reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(reviewReportLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
-                .addGap(29, 29, 29)
-                .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel9))
-                .addGap(37, 37, 37)
-                .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel15))
-                .addGap(31, 31, 31)
-                .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel16))
-                .addGap(30, 30, 30)
-                .addGroup(reviewReportLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel13))
-                .addGap(53, 53, 53)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(177, 177, 177))
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 554, Short.MAX_VALUE)
         );
 
-        parentPanel.add(reviewReport, "card6");
+        parentPanel.add(jPanel3, "card6");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -781,7 +310,7 @@ public class AdminDashboard extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(parentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(parentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -835,156 +364,12 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         // TODO add your handling code here:
-        addPanel(banUser);
+        addPanel(jPanel3);
     }//GEN-LAST:event_searchBtnActionPerformed
-
-    private void reviewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reviewBtnActionPerformed
-        // TODO add your handling code here:
-        addPanel(reviewReport);
-    }//GEN-LAST:event_reviewBtnActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void stayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stayBtnActionPerformed
-        // TODO add your handling code here:
-        addPanel (deleteReport);
-        
-        
-        
-    }//GEN-LAST:event_stayBtnActionPerformed
-
-    private void signoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutBtnActionPerformed
-        // TODO add your handling code here:
-        addPanel (signOut);
-    }//GEN-LAST:event_signoutBtnActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        
-        String userID = jTextField3.getText();
-        if (userID.equals(""))
-        {
-            JOptionPane.showMessageDialog(parentPanel, "Invalid User ID..");
-        }
-        else 
-        {
-            LandLord e = null;
-            try {
-                e = Data.LandLordList.getLandLord(userID);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (e != null)
-            {
-                e.setStatus("Ban");
-            }
-            else
-            {
-                try {
-                    Tenant t = Data.TenantList.getTenant(userID);
-                    if (t != null)
-                    {
-                        t.setStatus("Ban");
-                    }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(parentPanel, "No User Found !");
-                    }
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        
-        String userID = jTextField3.getText();
-        if (userID.equals(""))
-        {
-            JOptionPane.showMessageDialog(parentPanel, "Invalid User ID..");
-        }
-        else 
-        {
-            LandLord e = null;
-            try {
-                e = Data.LandLordList.getLandLord(userID);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (e != null)
-            {
-                jLabel5.setText(userID);
-                jLabel11.setText(e.getName());
-                jLabel12.setText(e.getStatus());
-                jLabel42.setText("LandLord");
-            }
-            else
-            {
-                try {
-                    Tenant t = Data.TenantList.getTenant(userID);
-                    if (t != null)
-                    {
-                        jLabel5.setText(userID);
-                        jLabel11.setText(t.getName());
-                        jLabel12.setText(t.getStatus());
-                        jLabel42.setText("Tenant");
-                    }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(parentPanel, "No User found!");
-                    }
-                } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-        
-        
-    }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        
-        String reportID = jTextField2.getText();
-        if (reportID.equals(""))
-        {
-            JOptionPane.showMessageDialog(parentPanel, "Invalid ID..");
-        }
-        else 
-        {
-            try {
-                Report r = ReportList.getReport(reportID);
-                if (r != null)
-                {
-                    jLabel5.setText(reportID);
-                    jLabel11.setText(r.getFiler().getName());
-                    jLabel12.setText(r.getStatus());
-                    jLabel13.setText(r.getDescription());
-                    jLabel14.setText(r.getStayR().getsBook().getBookingId());
-                    jLabel16.setText(r.getStayR().getStatus());
-                    jLabel15.setText(r.getStayR().getsBook().getsDate().toString());
-                }
-                else 
-                {
-                    JOptionPane.showMessageDialog(parentPanel, "No Report found !");
-                }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AdminDashboard.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            
-        }
-        
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1023,77 +408,26 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;
-    private javax.swing.JPanel banUser;
-    private javax.swing.JPanel deleteReport;
+    private javax.swing.JButton bookBtn;
+    private javax.swing.JPanel bookMark;
+    private javax.swing.JButton editBtn;
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel53;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel nameHolder;
     private javax.swing.JPanel parentPanel;
-    private javax.swing.JButton reviewBtn;
-    private javax.swing.JPanel reviewReport;
-    private javax.swing.JPanel reviewReport1;
-    private javax.swing.JPanel reviewReport2;
+    private javax.swing.JPanel propertyView;
+    private javax.swing.JPanel search;
     private javax.swing.JButton searchBtn;
-    private javax.swing.JPanel signOut;
     private javax.swing.JButton signoutBtn;
     private javax.swing.JButton stayBtn;
+    private javax.swing.JPanel stays;
     // End of variables declaration//GEN-END:variables
 }

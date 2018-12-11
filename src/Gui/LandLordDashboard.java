@@ -74,13 +74,6 @@ public class LandLordDashboard extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         parentPanel = new javax.swing.JPanel();
         propertyView = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
         search = new javax.swing.JPanel();
         bookMark = new javax.swing.JPanel();
         stays = new javax.swing.JPanel();
@@ -172,11 +165,6 @@ public class LandLordDashboard extends javax.swing.JFrame {
         signoutBtn.setText("Sign Out");
 
         jButton1.setText("Post Property");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -219,64 +207,15 @@ public class LandLordDashboard extends javax.swing.JFrame {
         parentPanel.setAutoscrolls(true);
         parentPanel.setLayout(new java.awt.CardLayout());
 
-        jLabel3.setText("Name:");
-
-        jLabel4.setText("City:");
-
-        jLabel5.setText("ID:");
-
-        jTextField1.setText("Enter Name");
-
-        jTextField2.setText("Enter City");
-
-        jTextField3.setText("Enter ID");
-
-        jButton2.setText("Submit");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout propertyViewLayout = new javax.swing.GroupLayout(propertyView);
         propertyView.setLayout(propertyViewLayout);
         propertyViewLayout.setHorizontalGroup(
             propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(propertyViewLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                    .addComponent(jTextField3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(propertyViewLayout.createSequentialGroup()
-                .addGap(244, 244, 244)
-                .addComponent(jButton2)
-                .addContainerGap(455, Short.MAX_VALUE))
+            .addGap(0, 764, Short.MAX_VALUE)
         );
         propertyViewLayout.setVerticalGroup(
             propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(propertyViewLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(jButton2)
-                .addContainerGap(393, Short.MAX_VALUE))
+            .addGap(0, 626, Short.MAX_VALUE)
         );
 
         parentPanel.add(propertyView, "card5");
@@ -424,14 +363,6 @@ public class LandLordDashboard extends javax.swing.JFrame {
 
     }//GEN-LAST:event_searchBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -474,21 +405,14 @@ public class LandLordDashboard extends javax.swing.JFrame {
     private javax.swing.JButton editBtn;
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JLabel nameHolder;
     private javax.swing.JPanel parentPanel;
     private javax.swing.JPanel propertyView;
