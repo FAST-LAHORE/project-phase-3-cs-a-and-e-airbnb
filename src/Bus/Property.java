@@ -6,6 +6,8 @@
 package Bus;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -14,27 +16,77 @@ import java.util.List;
  *
  * @author hp
  */
-public class Property implements Serializable  {
-    
-    PropertyType        pType;
-    List<Facilties>     pFacilities;
-    List<Restrictions>  pRestrictions;
-    List<Amenities>     pAmenities;
-    List<String>        Reviews;
-    List<Float>         Ratings;       
-    HashSet<Date>       datesBooked;
-    
+public class Property implements Serializable {
+
+    PropertyType pType;
+    HashSet<String> pFacilities;
+    HashSet<String> pRestrictions;
+    HashSet<String> pAmenities;
+    List<String> Reviews;
+    List<Float> Ratings;
+    HashSet<String> datesBooked;
+
+    String propertyDesc;
     String propertyAdd;
     String propertyCity;
     String propertyName;
     String propertyId;
     LandLord pLandLord;
+    Double pCharge;
+    String pImage;
 
-   
-    
-    Boolean isAvailable(Date d){
-    // CHECK CURRENT dATE AND bOOKED DATE
-        throw new UnsupportedOperationException();
+    public Boolean isAvailable(LocalDate d) {
+        // CHECK CURRENT dATE AND bOOKED DATE
+        return !datesBooked.contains(d.toString());
+    }
+
+    public void addDate(String d) {
+        this.datesBooked.add(d.toString());
+    }
+
+    public Property() {
+        pFacilities = new HashSet<String>();
+        pRestrictions = new HashSet<String>();
+        pAmenities = new HashSet<String>();
+        Reviews = new ArrayList<String>();
+        Ratings = new ArrayList<Float>();
+        datesBooked = new HashSet<String>();
+    }
+
+    public String getAverageRating() {
+        if (Ratings.isEmpty()) {
+            return ("Not Present");
+        } else {
+            Double sum = 0.0;
+            for (Float i : Ratings) {
+                sum += (Float) i;
+            }
+            return String.valueOf((double) sum / Ratings.size());
+        }
+    }
+
+    public Double getpCharge() {
+        return pCharge;
+    }
+
+    public void setpCharge(Double pCharge) {
+        this.pCharge = pCharge;
+    }
+
+    public String getpImage() {
+        return pImage;
+    }
+
+    public void setpImage(String pImage) {
+        this.pImage = pImage;
+    }
+
+    public String getPropertyDesc() {
+        return propertyDesc;
+    }
+
+    public void setPropertyDesc(String propertyDesc) {
+        this.propertyDesc = propertyDesc;
     }
 
     public String getPropertyAdd() {
@@ -60,16 +112,15 @@ public class Property implements Serializable  {
     public void setPropertyName(String propertyName) {
         this.propertyName = propertyName;
     }
-    
-    
-     public LandLord getpLandLord() {
+
+    public LandLord getpLandLord() {
         return pLandLord;
     }
 
     public void setpLandLord(LandLord pLandLord) {
         this.pLandLord = pLandLord;
     }
-    
+
     public PropertyType getpType() {
         return pType;
     }
@@ -78,27 +129,27 @@ public class Property implements Serializable  {
         this.pType = pType;
     }
 
-    public List<Facilties> getpFacilities() {
+    public HashSet<String> getpFacilities() {
         return pFacilities;
     }
 
-    public void setpFacilities(List<Facilties> pFacilities) {
+    public void setpFacilities(HashSet<String> pFacilities) {
         this.pFacilities = pFacilities;
     }
 
-    public List<Restrictions> getpRestrictions() {
+    public HashSet<String> getpRestrictions() {
         return pRestrictions;
     }
 
-    public void setpRestrictions(List<Restrictions> pRestrictions) {
+    public void setpRestrictions(HashSet<String> pRestrictions) {
         this.pRestrictions = pRestrictions;
     }
 
-    public List<Amenities> getpAmenities() {
+    public HashSet<String> getpAmenities() {
         return pAmenities;
     }
 
-    public void setpAmenities(List<Amenities> pAmenities) {
+    public void setpAmenities(HashSet<String> pAmenities) {
         this.pAmenities = pAmenities;
     }
 
@@ -118,11 +169,11 @@ public class Property implements Serializable  {
         this.Ratings = Ratings;
     }
 
-    public HashSet<Date> getDatesBooked() {
+    public HashSet<String> getDatesBooked() {
         return datesBooked;
     }
 
-    public void setDatesBooked(HashSet<Date> datesBooked) {
+    public void setDatesBooked(HashSet<String> datesBooked) {
         this.datesBooked = datesBooked;
     }
 
@@ -133,6 +184,5 @@ public class Property implements Serializable  {
     public void setPropertyId(String propertyId) {
         this.propertyId = propertyId;
     }
-    
-    
+
 }

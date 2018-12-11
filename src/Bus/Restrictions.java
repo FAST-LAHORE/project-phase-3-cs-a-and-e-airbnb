@@ -5,10 +5,18 @@
  */
 package Bus;
 
+import java.io.Serializable;
+
 /**
  *
  * @author hp
  */
-public enum Restrictions {
+public enum Restrictions implements Serializable {
+Curfew,
+No_Party,
+No_Smoking,
+No_Pet;
+    
+    
     
 }

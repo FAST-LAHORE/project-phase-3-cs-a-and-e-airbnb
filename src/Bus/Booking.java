@@ -6,6 +6,7 @@
 package Bus;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -14,10 +15,25 @@ import java.util.Date;
  */
 public class Booking implements Serializable {
     String bookingId;
-    Date bDate;
+    LocalDate sDate;
+    LocalDate eDate;
     String status;
     Tenant bTenant;
     Property bProperty;
+
+    public Booking()  {
+    }
+
+    public Booking(String bookingId, LocalDate sDate, LocalDate eDate, String status, Tenant bTenant, Property bProperty) {
+        this.bookingId = bookingId;
+        this.sDate = sDate;
+        this.eDate = eDate;
+        this.status = status;
+        this.bTenant = bTenant;
+        this.bProperty = bProperty;
+    }
+
+ 
 
     public String getBookingId() {
         return bookingId;
@@ -27,14 +43,23 @@ public class Booking implements Serializable {
         this.bookingId = bookingId;
     }
 
-    public Date getbDate() {
-        return bDate;
+    public LocalDate getsDate() {
+        return sDate;
     }
 
-    public void setbDate(Date bDate) {
-        this.bDate = bDate;
+    public void setsDate(LocalDate sDate) {
+        this.sDate = sDate;
     }
 
+    public LocalDate geteDate() {
+        return eDate;
+    }
+
+    public void seteDate(LocalDate eDate) {
+        this.eDate = eDate;
+    }
+
+  
     public String getStatus() {
         return status;
     }

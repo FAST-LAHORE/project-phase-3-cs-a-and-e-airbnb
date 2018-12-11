@@ -4,9 +4,13 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
 <<<<<<< HEAD
+            <name>AirBnB</name>
+=======
+<<<<<<< HEAD
             <name>FProject</name>
 =======
             <name>AirBnB</name>
+>>>>>>> origin/master
 >>>>>>> origin/master
             <source-roots>
                 <root id="src.dir"/>

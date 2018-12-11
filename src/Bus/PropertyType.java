@@ -12,5 +12,7 @@ import java.io.Serializable;
  * @author hp
  */
 public enum PropertyType implements Serializable {
-    
+Room,
+Apartment,
+Bunglow;
 }

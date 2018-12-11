@@ -6,15 +6,33 @@
 package Gui;
 
 import Bus.BookMark;
-import Bus.Stay;
-import Bus.Tenant;
+import Bus.Booking;
+import Bus.Facilties;
+import Bus.Property;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.awt.Image;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
+import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.xml.bind.ParseConversionEvent;
 
 /**
  *
@@ -25,32 +43,45 @@ public class TenantDashBoard extends javax.swing.JFrame {
     /**
      * Creates new form TenantDashBoard
      */
-    private int count = 0;
-    Tenant t;
-    public TenantDashBoard()  {
-        setUndecorated(true);
-        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-
-        initComponents();        
-        parentPanel.removeAll();
-    }
-
-    public TenantDashBoard(Bus.Tenant c)  {
+    List<Property> searchResult;
+    Boolean filterVisible = true;
+    Property currentProp;
+    public TenantDashBoard() {
         setUndecorated(true);
         getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 
         initComponents();
-        this.t = c;
-        nameHolder.setText(c.getName());
-        
-        parentPanel.removeAll();
+        nameHolder.setText(Bus.system.getCurrentTenant().getName());
+        CardLayout Cards = (CardLayout) parentPanel.getLayout();
+        Cards.show(parentPanel, "card6");
+
     }
-    private void addPanel(JPanel myP) {
-        parentPanel.add(myP);
-        count++;
-        parentPanel.repaint();
-        parentPanel.revalidate();
-        
+
+    public TenantDashBoard(Bus.Tenant c) {
+        setUndecorated(true);
+        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+
+        initComponents();
+
+        CardLayout Cards = (CardLayout) parentPanel.getLayout();
+        Cards.show(parentPanel, "card6");
+
+    }
+
+    public void showProperty(Property p) {
+        try {
+            //jLabel6.setIcon((p.getpImage()));
+            jTextField2.setText(p.getPropertyName());
+            jTextField3.setText(p.getPropertyAdd());
+            jTextField4.setText(String.valueOf(p.getpCharge()));
+            jTextField5.setText(String.valueOf(p.getAverageRating()));
+            jTextArea1.setText(p.getPropertyDesc());
+        }
+        catch(Exception e){
+            printError("Error", "Error in loading property");
+        }
+            
+
     }
 //public static String getLookAndFeelClassName(String nameSnippet) {
 //    LookAndFeelInfo[] plafs = UIManager.getInstalledLookAndFeels();
@@ -61,6 +92,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
 //    }
 //    return null;
 //}
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,38 +111,74 @@ public class TenantDashBoard extends javax.swing.JFrame {
         nameHolder = new javax.swing.JLabel();
         backBtn = new javax.swing.JButton();
         exitBtn = new javax.swing.JButton();
-        jPanel5 = new javax.swing.JPanel();
+        btnPanel = new javax.swing.JPanel();
         bookBtn = new javax.swing.JButton();
         stayBtn = new javax.swing.JButton();
         searchBtn = new javax.swing.JButton();
         editBtn = new javax.swing.JButton();
         signoutBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         parentPanel = new javax.swing.JPanel();
+        bookingView = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        bgTable = new javax.swing.JTable();
+        allProperty = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        pTable = new javax.swing.JTable();
+        fromPropBtn = new javax.swing.JButton();
+        makeBkBtn = new javax.swing.JButton();
+        tenantView = new javax.swing.JPanel();
         propertyView = new javax.swing.JPanel();
-        search = new javax.swing.JPanel();
-        bookMark = new javax.swing.JPanel();
-        stays = new javax.swing.JPanel();
-        edit = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
+        frDateCh2 = new com.toedter.calendar.JDateChooser();
+        jLabel14 = new javax.swing.JLabel();
+        toDateCh2 = new com.toedter.calendar.JDateChooser();
+        jLabel15 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        search = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        magnifyBtn = new javax.swing.JButton();
+        typeLabel = new javax.swing.JLabel();
+        resLabel = new javax.swing.JLabel();
+        amenLabel = new javax.swing.JLabel();
+        facLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        typeList = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        resList = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        amenList = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        facList = new javax.swing.JList<>();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        frDateCh = new com.toedter.calendar.JDateChooser();
+        toDateCh = new com.toedter.calendar.JDateChooser();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        bookMark = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        undoBkBtn = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        bTable = new javax.swing.JTable();
+        fromBookMark = new javax.swing.JButton();
+        stays = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Dash Board");
@@ -121,6 +189,8 @@ public class TenantDashBoard extends javax.swing.JFrame {
         jLayeredPane1.setBackground(new java.awt.Color(0, 0, 0));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\hp\\Documents\\NetBeansProjects\\AirBnB\\img\\icon.jpg")); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -143,12 +213,14 @@ public class TenantDashBoard extends javax.swing.JFrame {
         nameHolder.setForeground(new java.awt.Color(255, 255, 255));
         nameHolder.setText("         ");
 
+        backBtn.setIcon(new javax.swing.ImageIcon("C:\\Users\\hp\\Documents\\NetBeansProjects\\AirBnB\\img\\back.png")); // NOI18N
         backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backBtnActionPerformed(evt);
             }
         });
 
+        exitBtn.setIcon(new javax.swing.ImageIcon("C:\\Users\\hp\\Documents\\NetBeansProjects\\AirBnB\\img\\cross.png")); // NOI18N
         exitBtn.setText(" ");
         exitBtn.setBorderPainted(false);
         exitBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -184,9 +256,14 @@ public class TenantDashBoard extends javax.swing.JFrame {
                     .addComponent(exitBtn, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
 
-        jPanel5.setBackground(new java.awt.Color(255, 102, 102));
+        btnPanel.setBackground(new java.awt.Color(255, 102, 102));
 
         bookBtn.setText("Book Marks");
+        bookBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookBtnActionPerformed(evt);
+            }
+        });
 
         stayBtn.setText("Past Stays");
 
@@ -197,41 +274,51 @@ public class TenantDashBoard extends javax.swing.JFrame {
             }
         });
 
-        editBtn.setText("Edit Profile");
-        editBtn.addActionListener(new java.awt.event.ActionListener() {
+        editBtn.setText("Edit");
+
+        signoutBtn.setText("Sign Out");
+        signoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBtnActionPerformed(evt);
+                signoutBtnActionPerformed(evt);
             }
         });
 
-        signoutBtn.setText("Sign Out");
+        jButton1.setText("Bookings ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout btnPanelLayout = new javax.swing.GroupLayout(btnPanel);
+        btnPanel.setLayout(btnPanelLayout);
+        btnPanelLayout.setHorizontalGroup(
+            btnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(btnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(bookBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(stayBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(editBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(searchBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(signoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(signoutBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        btnPanelLayout.setVerticalGroup(
+            btnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnPanelLayout.createSequentialGroup()
                 .addGap(126, 126, 126)
                 .addComponent(bookBtn)
-                .addGap(48, 48, 48)
+                .addGap(37, 37, 37)
                 .addComponent(stayBtn)
-                .addGap(48, 48, 48)
+                .addGap(34, 34, 34)
+                .addComponent(jButton1)
+                .addGap(37, 37, 37)
                 .addComponent(searchBtn)
-                .addGap(43, 43, 43)
+                .addGap(31, 31, 31)
                 .addComponent(editBtn)
-                .addGap(41, 41, 41)
+                .addGap(31, 31, 31)
                 .addComponent(signoutBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -241,45 +328,536 @@ public class TenantDashBoard extends javax.swing.JFrame {
         parentPanel.setAutoscrolls(true);
         parentPanel.setLayout(new java.awt.CardLayout());
 
+        jLabel17.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel17.setText("Bookings: ");
+
+        bgTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Booking Id", "Property Id", "Status", "Start Date", "End Date"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(bgTable);
+        if (bgTable.getColumnModel().getColumnCount() > 0) {
+            bgTable.getColumnModel().getColumn(0).setResizable(false);
+            bgTable.getColumnModel().getColumn(1).setResizable(false);
+            bgTable.getColumnModel().getColumn(2).setResizable(false);
+            bgTable.getColumnModel().getColumn(3).setResizable(false);
+            bgTable.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        javax.swing.GroupLayout bookingViewLayout = new javax.swing.GroupLayout(bookingView);
+        bookingView.setLayout(bookingViewLayout);
+        bookingViewLayout.setHorizontalGroup(
+            bookingViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookingViewLayout.createSequentialGroup()
+                .addGroup(bookingViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bookingViewLayout.createSequentialGroup()
+                        .addGap(437, 437, 437)
+                        .addComponent(jLabel17))
+                    .addGroup(bookingViewLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 879, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(83, Short.MAX_VALUE))
+        );
+        bookingViewLayout.setVerticalGroup(
+            bookingViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bookingViewLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel17)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(397, Short.MAX_VALUE))
+        );
+
+        parentPanel.add(bookingView, "card8");
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel9.setText("Properties:");
+
+        pTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Image", "ID", "Name", "Description", "Cost", "Rating"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        pTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        pTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane5.setViewportView(pTable);
+        if (pTable.getColumnModel().getColumnCount() > 0) {
+            pTable.getColumnModel().getColumn(0).setResizable(false);
+            pTable.getColumnModel().getColumn(1).setResizable(false);
+            pTable.getColumnModel().getColumn(2).setResizable(false);
+            pTable.getColumnModel().getColumn(3).setResizable(false);
+            pTable.getColumnModel().getColumn(4).setResizable(false);
+            pTable.getColumnModel().getColumn(5).setResizable(false);
+        }
+
+        fromPropBtn.setText("View");
+        fromPropBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fromPropBtnActionPerformed(evt);
+            }
+        });
+
+        makeBkBtn.setText("Book Mark");
+        makeBkBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                makeBkBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout allPropertyLayout = new javax.swing.GroupLayout(allProperty);
+        allProperty.setLayout(allPropertyLayout);
+        allPropertyLayout.setHorizontalGroup(
+            allPropertyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(allPropertyLayout.createSequentialGroup()
+                .addGroup(allPropertyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(allPropertyLayout.createSequentialGroup()
+                        .addGap(397, 397, 397)
+                        .addComponent(jLabel9))
+                    .addGroup(allPropertyLayout.createSequentialGroup()
+                        .addGap(265, 265, 265)
+                        .addComponent(makeBkBtn)
+                        .addGap(207, 207, 207)
+                        .addComponent(fromPropBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(allPropertyLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
+        );
+        allPropertyLayout.setVerticalGroup(
+            allPropertyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(allPropertyLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel9)
+                .addGap(9, 9, 9)
+                .addGroup(allPropertyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fromPropBtn)
+                    .addComponent(makeBkBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 564, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(204, Short.MAX_VALUE))
+        );
+
+        parentPanel.add(allProperty, "card7");
+
+        javax.swing.GroupLayout tenantViewLayout = new javax.swing.GroupLayout(tenantView);
+        tenantView.setLayout(tenantViewLayout);
+        tenantViewLayout.setHorizontalGroup(
+            tenantViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1017, Short.MAX_VALUE)
+        );
+        tenantViewLayout.setVerticalGroup(
+            tenantViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 883, Short.MAX_VALUE)
+        );
+
+        parentPanel.add(tenantView, "card6");
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel5.setText("Property: ");
+
+        jLabel6.setText(" ");
+
+        jLabel7.setText("Name:");
+
+        jTextField2.setEditable(false);
+        jTextField2.setText(" ");
+
+        jLabel8.setText("Property Address:");
+
+        jTextField3.setEditable(false);
+        jTextField3.setText(" ");
+
+        jLabel11.setText("Cost:");
+
+        jTextField4.setEditable(false);
+        jTextField4.setText(" ");
+
+        jLabel12.setText("Rating:");
+
+        jTextField5.setEditable(false);
+        jTextField5.setText(" ");
+
+        jButton2.setText("Make Booking");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("View Land Lord");
+
+        jLabel13.setText("From: ");
+
+        jLabel14.setText("To:");
+
+        jLabel15.setText("People:");
+
+        jTextField6.setText("            ");
+
+        jLabel16.setText("Description: ");
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane7.setViewportView(jTextArea1);
+
         javax.swing.GroupLayout propertyViewLayout = new javax.swing.GroupLayout(propertyView);
         propertyView.setLayout(propertyViewLayout);
         propertyViewLayout.setHorizontalGroup(
             propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 726, Short.MAX_VALUE)
+            .addGroup(propertyViewLayout.createSequentialGroup()
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGap(407, 407, 407)
+                        .addComponent(jLabel5))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGap(437, 437, 437)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(propertyViewLayout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel16)
+                    .addComponent(jLabel15))
+                .addGap(18, 18, 18)
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField2)
+                            .addComponent(jTextField3)
+                            .addComponent(jTextField4)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(327, 327, 327))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(toDateCh2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(frDateCh2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         propertyViewLayout.setVerticalGroup(
             propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 657, Short.MAX_VALUE)
+            .addGroup(propertyViewLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)
+                            .addComponent(jButton2))
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(69, 69, 69)
+                        .addComponent(jLabel8)))
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jButton4)))
+                .addGap(28, 28, 28)
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel16)
+                        .addGap(109, 109, 109))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, propertyViewLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)))
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(propertyViewLayout.createSequentialGroup()
+                        .addComponent(frDateCh2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(toDateCh2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)))
+                    .addComponent(jLabel13))
+                .addGap(44, 44, 44)
+                .addGroup(propertyViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
 
         parentPanel.add(propertyView, "card5");
 
         search.setBackground(new java.awt.Color(102, 102, 102));
 
+        magnifyBtn.setIcon(new javax.swing.ImageIcon("C:\\Users\\hp\\Documents\\NetBeansProjects\\AirBnB\\img\\search.png")); // NOI18N
+        magnifyBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                magnifyBtnActionPerformed(evt);
+            }
+        });
+
+        typeLabel.setText("Property Types:");
+
+        resLabel.setText("Restrictions:");
+
+        amenLabel.setText("Amenities:");
+
+        facLabel.setText("Facilities:");
+
+        typeList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Room", "Apartment", "Bunglow" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        typeList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(typeList);
+
+        resList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Curfew", "No_Party", "No_Smoking", "No_Pet" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(resList);
+
+        amenList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "HotWater", "Kitchen", "AttachedBath", "SingleBed", "DoubleBed", "Family" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(amenList);
+
+        facList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "No_Cancellation_Charge", "Gym", "Independent", "South_Facing" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(facList);
+
+        jRadioButton1.setText("Filter");
+        jRadioButton1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jRadioButton1StateChanged(evt);
+            }
+        });
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("From:");
+
+        jLabel4.setText("To:");
+
         javax.swing.GroupLayout searchLayout = new javax.swing.GroupLayout(search);
         search.setLayout(searchLayout);
         searchLayout.setHorizontalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 726, Short.MAX_VALUE)
+            .addGroup(searchLayout.createSequentialGroup()
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(searchLayout.createSequentialGroup()
+                            .addGap(244, 244, 244)
+                            .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(searchLayout.createSequentialGroup()
+                                    .addComponent(amenLabel)
+                                    .addGap(367, 367, 367)
+                                    .addComponent(facLabel))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(typeLabel)
+                                .addGroup(searchLayout.createSequentialGroup()
+                                    .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(frDateCh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel3))
+                                    .addGap(301, 301, 301)
+                                    .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(toDateCh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4))))
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
+                            .addGap(0, 0, Short.MAX_VALUE)
+                            .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(resLabel)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(64, 64, 64)))
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(magnifyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(139, Short.MAX_VALUE))
+            .addGroup(searchLayout.createSequentialGroup()
+                .addGap(394, 394, 394)
+                .addComponent(jRadioButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         searchLayout.setVerticalGroup(
             searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 657, Short.MAX_VALUE)
+            .addGroup(searchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(magnifyBtn))
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButton1)
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(searchLayout.createSequentialGroup()
+                        .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(typeLabel)
+                            .addComponent(resLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1))
+                        .addGap(39, 39, 39)
+                        .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(searchLayout.createSequentialGroup()
+                                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(facLabel)
+                                    .addComponent(amenLabel))
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(76, 76, 76)
+                        .addComponent(jLabel3))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, searchLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4)))
+                .addGap(18, 18, 18)
+                .addGroup(searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(frDateCh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(toDateCh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(205, 205, 205))
         );
 
         parentPanel.add(search, "card4");
 
         bookMark.setBackground(new java.awt.Color(102, 102, 102));
 
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel10.setText("Book Marks");
+
+        undoBkBtn.setText("Undo Book Mark");
+        undoBkBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                undoBkBtnActionPerformed(evt);
+            }
+        });
+
+        bTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Image", "Book ID", "ID", "Name", "Description", "Cost", "Rating"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        bTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane6.setViewportView(bTable);
+        if (bTable.getColumnModel().getColumnCount() > 0) {
+            bTable.getColumnModel().getColumn(0).setResizable(false);
+            bTable.getColumnModel().getColumn(1).setResizable(false);
+            bTable.getColumnModel().getColumn(2).setResizable(false);
+            bTable.getColumnModel().getColumn(3).setResizable(false);
+            bTable.getColumnModel().getColumn(4).setResizable(false);
+            bTable.getColumnModel().getColumn(5).setResizable(false);
+            bTable.getColumnModel().getColumn(6).setResizable(false);
+        }
+
+        fromBookMark.setText("View");
+        fromBookMark.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fromBookMarkActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout bookMarkLayout = new javax.swing.GroupLayout(bookMark);
         bookMark.setLayout(bookMarkLayout);
         bookMarkLayout.setHorizontalGroup(
             bookMarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 726, Short.MAX_VALUE)
+            .addGroup(bookMarkLayout.createSequentialGroup()
+                .addGroup(bookMarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bookMarkLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane6))
+                    .addGroup(bookMarkLayout.createSequentialGroup()
+                        .addGroup(bookMarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(bookMarkLayout.createSequentialGroup()
+                                .addGap(379, 379, 379)
+                                .addComponent(jLabel10))
+                            .addGroup(bookMarkLayout.createSequentialGroup()
+                                .addGap(323, 323, 323)
+                                .addComponent(undoBkBtn)
+                                .addGap(45, 45, 45)
+                                .addComponent(fromBookMark, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 421, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         bookMarkLayout.setVerticalGroup(
             bookMarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 657, Short.MAX_VALUE)
+            .addGroup(bookMarkLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addGroup(bookMarkLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(undoBkBtn)
+                    .addComponent(fromBookMark))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         parentPanel.add(bookMark, "card3");
@@ -290,148 +868,14 @@ public class TenantDashBoard extends javax.swing.JFrame {
         stays.setLayout(staysLayout);
         staysLayout.setHorizontalGroup(
             staysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 726, Short.MAX_VALUE)
+            .addGap(0, 1017, Short.MAX_VALUE)
         );
         staysLayout.setVerticalGroup(
             staysLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 657, Short.MAX_VALUE)
+            .addGap(0, 883, Short.MAX_VALUE)
         );
 
         parentPanel.add(stays, "card2");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Basic Info:");
-
-        jLabel4.setText("Name:");
-
-        jLabel5.setText("CNIC:");
-
-        jLabel6.setText("Contact no.");
-
-        jLabel7.setText("Email:");
-
-        jLabel8.setText("Password:");
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel9.setText("Account Info:");
-
-        jLabel10.setText("Currency:");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PKR", "USD", "AUD", "EUR" }));
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel11.setText("Others:");
-
-        jLabel12.setText("Education:");
-
-        jLabel13.setText("Address:");
-
-        jButton1.setText("Save Change");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout editLayout = new javax.swing.GroupLayout(edit);
-        edit.setLayout(editLayout);
-        editLayout.setHorizontalGroup(
-            editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(editLayout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3)
-                    .addGroup(editLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                    .addGroup(editLayout.createSequentialGroup()
-                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(34, 34, 34)
-                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)))
-                    .addGroup(editLayout.createSequentialGroup()
-                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4))))
-                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(editLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel9)
-                                .addGroup(editLayout.createSequentialGroup()
-                                    .addGap(66, 66, 66)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(editLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(editLayout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel11))))
-                .addContainerGap(140, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, editLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        editLayout.setVerticalGroup(
-            editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(editLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel9))
-                .addGap(28, 28, 28)
-                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(editLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(editLayout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))))
-                .addGap(35, 35, 35)
-                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGap(30, 30, 30)
-                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel13)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(344, Short.MAX_VALUE))
-        );
-
-        parentPanel.add(edit, "card6");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -441,7 +885,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -456,7 +900,7 @@ public class TenantDashBoard extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -501,11 +945,9 @@ public class TenantDashBoard extends javax.swing.JFrame {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
-        if(count > 0)   {
-            parentPanel.remove(--count);
-            parentPanel.repaint();
-            parentPanel.revalidate();
-        }
+        CardLayout Cards = (CardLayout) parentPanel.getLayout();
+        Cards.previous(parentPanel);
+
     }//GEN-LAST:event_backBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
@@ -515,98 +957,287 @@ public class TenantDashBoard extends javax.swing.JFrame {
 
     private void searchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBtnActionPerformed
         // TODO add your handling code here:
-        addPanel(search);
-        
+        CardLayout Cards = (CardLayout) parentPanel.getLayout();
+        Cards.show(parentPanel, "card4");
+
+
     }//GEN-LAST:event_searchBtnActionPerformed
 
-    private void editBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBtnActionPerformed
+    private void bookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookBtnActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel dtm = (DefaultTableModel) bTable.getModel();
+        dtm.setRowCount(0);
+
+        try {
+            List<BookMark> bk = Data.BookMarkList.getAllUserBookMark(Bus.system.getCurrentTenant().getUserId());
+            CardLayout Cards = (CardLayout) parentPanel.getLayout();
+            Cards.show(parentPanel, "card3");
+
+            if (bk != null) {
+                for (BookMark b : bk) {
+                    Property sr = b.getBookProperty();
+                    JLabel tempLabel = new JLabel();
+                    tempLabel.setIcon(new ImageIcon(sr.getpImage()));
+
+                    Object[] row = {tempLabel.getIcon(), b.getBookMarkId(), sr.getPropertyId(), sr.getPropertyName(), sr.getPropertyDesc(), sr.getpCharge(), sr.getAverageRating()};
+                    DefaultTableModel model = (DefaultTableModel) bTable.getModel();
+                    bTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
+                    DefaultTableModel Tmodel = (DefaultTableModel) bTable.getModel();
+
+                    // Tmodel.setValueAt(tempLabel.getIcon(), 0, 3);
+                    model.addRow(row);
+                }
+            } else {
+                printError("Notify", "No Book Mark exists");
+            }
+        } catch (Exception e) {
+            printError("Error", "Book Marks Can not be loaded");
+        }
+
+    }//GEN-LAST:event_bookBtnActionPerformed
+
+    private void fromPropBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromPropBtnActionPerformed
+        // TODO add your handling code here:
+        currentProp =null;
+        CardLayout Cards = (CardLayout) parentPanel.getLayout();
+        Cards.show(parentPanel, "card5");
+        try {
+            int column = 1;
+            int row = pTable.getSelectedRow();
+            String value = pTable.getModel().getValueAt(row, column).toString();
+            currentProp = Data.PropertyList.getProperty(value);
+            if (currentProp!=null) {
+                this.showProperty(currentProp);
+            } else {
+                printError("Failure", "Booking Failed");
+            }
+        } catch (Exception e) {
+            printError("Error", "Booking Failed");
+        }
+
+    }//GEN-LAST:event_fromPropBtnActionPerformed
+
+    private void fromBookMarkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromBookMarkActionPerformed
+        
+           // TODO add your handling code here:
+        currentProp =null;
+        CardLayout Cards = (CardLayout) parentPanel.getLayout();
+        Cards.show(parentPanel, "card5");
+        try {
+            int column = 1;
+            int row = bTable.getSelectedRow();
+            String value = bTable.getModel().getValueAt(row, column).toString();
+            currentProp = Data.PropertyList.getProperty(Data.BookMarkList.getBookMark(value).getBookProperty().getPropertyId());
+            if (currentProp!=null) {
+                this.showProperty(currentProp);
+            } else {
+                printError("Failure", "Booking Failed");
+            }
+        } catch (Exception e) {
+            printError("Error", "Booking Failed");
+        }
+    }//GEN-LAST:event_fromBookMarkActionPerformed
+
+    private void magnifyBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_magnifyBtnActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel dtm = (DefaultTableModel) pTable.getModel();
+        dtm.setRowCount(0);
+        try {
+            String address = String.valueOf(jTextField1.getText());
+            if (filterVisible) {
+                String pt = String.valueOf(typeList.getSelectedValue());
+                List<String> res = resList.getSelectedValuesList();
+                List<String> fc = (List<String>) facList.getSelectedValuesList();
+                List<String> amen = amenList.getSelectedValuesList();
+                LocalDate s = frDateCh.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate e = toDateCh.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                searchResult = Data.PropertyList.searchResult(address, pt, res, fc, amen, s, e);
+            } else {
+                searchResult = Data.PropertyList.searchResult(address, null, null, null, null, null, null);
+
+            }
+
+            try {
+                if (searchResult.isEmpty()) {
+                    printError("Result ", "No such Property found");
+
+                } else {
+                    CardLayout Cards = (CardLayout) parentPanel.getLayout();
+                    Cards.show(parentPanel, "card7");
+                    for (Property sr : searchResult) {
+                        JLabel tempLabel = new JLabel();
+                        tempLabel.setIcon(new ImageIcon(sr.getpImage()));
+
+                        Object[] row = {tempLabel.getIcon(), sr.getPropertyId(), sr.getPropertyName(), sr.getPropertyDesc(), sr.getpCharge(), sr.getAverageRating()};
+                        DefaultTableModel model = (DefaultTableModel) pTable.getModel();
+                        pTable.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
+                        DefaultTableModel Tmodel = (DefaultTableModel) bTable.getModel();
+
+                        // Tmodel.setValueAt(tempLabel.getIcon(), 0, 3);
+                        model.addRow(row);
+                    }
+                }
+            } catch (Exception e1) {
+                printError("Error", "Display Error Contact Suppport");
+            }
+        } catch (Exception e) {
+            printError("Error", "Incorrect Input");
+        }
+
+
+    }//GEN-LAST:event_magnifyBtnActionPerformed
+    class ImageRenderer extends DefaultTableCellRenderer {
+
+        JLabel lbl = new JLabel();
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            TableColumn tc = table.getColumn("Image");
+            tc.setMinWidth(50);
+            tc.setMaxWidth(50);
+
+            table.setRowHeight(150);
+
+            lbl.setIcon((Icon) value);
+            return lbl;
+        }
+    }
+    private void signoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signoutBtnActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new log().setVisible(true);
+    }//GEN-LAST:event_signoutBtnActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+        if (!filterVisible) {
+            filterVisible = true;
+
+        } else {
+            filterVisible = false;
+        }
+
+        typeList.setVisible(filterVisible);
+        resList.setVisible(filterVisible);
+        facList.setVisible(filterVisible);
+        amenList.setVisible(filterVisible);
+        frDateCh.setVisible(filterVisible);
+        toDateCh.setVisible(filterVisible);
+        typeLabel.setVisible(filterVisible);
+        resLabel.setVisible(filterVisible);
+        amenLabel.setVisible(filterVisible);
+        facLabel.setVisible(filterVisible);
+        jLabel3.setVisible(filterVisible);
+        jLabel4.setVisible(filterVisible);
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void makeBkBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_makeBkBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            int column = 1;
+            int row = pTable.getSelectedRow();
+
+            String value = pTable.getModel().getValueAt(row, column).toString();
+            Bus.Property temp = Data.PropertyList.getProperty(value);
+            if (Bus.system.getCurrentTenant().makeBookMark(temp)) {
+                printError("Success", "Book Mark made");
+            } else {
+                printError("Failure", "Book Mark  not made");
+            }
+        } catch (Exception c) {
+            printError("Error", "Book Mark  Can  not be made");
+
+        }
+
+
+    }//GEN-LAST:event_makeBkBtnActionPerformed
+
+    private void jRadioButton1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton1StateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jRadioButton1StateChanged
+
+    private void undoBkBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_undoBkBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            int column = 1;
+            int row = bTable.getSelectedRow();
+
+            String value = bTable.getModel().getValueAt(row, column).toString();
+
+            if (Data.BookMarkList.deleteBookMark(value)) {
+                printError("Success", "Book Mark deleted");
+                CardLayout Cards = (CardLayout) parentPanel.getLayout();
+                Cards.show(parentPanel, "card6");
+
+            } else {
+                printError("Failure", "Book Mark  not deleted");
+            }
+        } catch (Exception c) {
+            printError("Error", "Book Mark  Can  not be deleted");
+
+        }
+
+    }//GEN-LAST:event_undoBkBtnActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-        addPanel(edit);
-    }//GEN-LAST:event_editBtnActionPerformed
+        try{
+                LocalDate s = frDateCh2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate e = toDateCh2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                //Integer.parseInt(jTextField6.getText());
+            if(Bus.system.currentTenant.requestBooking(currentProp,s, e))   {
+            
+            
+            printError("Success", "Success Requesting Book Mark");
+            }
+            else    {
+                printError("Failure", "Failure Requesting Book Mark");
+            }
+        }
+        catch(Exception e){
+            printError("Error", "Error Requesting Book Mark");
+        }
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String name,CNIC,contact,email,pass,currency,education,address; 
-        name = jTextField1.getText();
-        if ("".equals(name))
-        {
-            JOptionPane.showMessageDialog(jButton1, "Invalid email address");
+        List<Booking> result = null;
+          DefaultTableModel dtm = (DefaultTableModel) bgTable.getModel();
+        dtm.setRowCount(0);
+        try {
+            // TODO add your handling code here:
+            result = Data.BookingList.getAllTenantBookings(Bus.system.getCurrentTenant().getUserId());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TenantDashBoard.class.getName()).log(Level.SEVERE, null, ex);
         }
-        else
-        {
-            CNIC = jTextField2.getText();
-            if (CNIC.equals(""))
-            {
-                JOptionPane.showMessageDialog(jButton1, "Invalid CNIC");
-            }
-            else 
-            {
-                contact = jTextField3.getText();
-                if (contact.equals(""))
-                {
-                    JOptionPane.showMessageDialog(jButton1, "Invalid contact no");
-                }
-                else 
-                {
-                    email = jTextField4.getText();
-                    if (email.equals(""))
-                    {
-                        JOptionPane.showMessageDialog(jButton1, "Invalid email address");
-                    }
-                    else if (email.indexOf("@")>0 && email.indexOf(".com")>0 && email.endsWith(".com")==true)
-                    {
-                        pass = jPasswordField1.getText();
-                        if (pass.equals(""))
-                        {
-                            JOptionPane.showMessageDialog(jButton1, "Invalid Password");
-                        }
-                        else 
-                        {
-                            currency = jComboBox1.getSelectedItem().toString();
-                            if (currency.equals(""))
-                            {
-                                JOptionPane.showMessageDialog(jButton1, "Select Currency");
-                            }
-                            else 
-                            {
-                                education  = jTextField6.getText();
-                                if (education.equals(""))
-                                {
-                                    JOptionPane.showMessageDialog(jButton1, "Enter Education");
-                                }
-                                else 
-                                {
-                                    address = jTextField7.getText();
-                                    if (address.equals(""))
-                                    {
-                                        JOptionPane.showMessageDialog(jButton1, "Enter Valid address");
-                                    }
-                                    else 
-                                    {
-                                        t.setName(name);
-                                        t.setCurrency(currency);
-                                        t.setAddress(address);
-                                        t.setEmail(email);
-                                        t.setNationalId(CNIC);
-                                        t.setPassword(pass);
-                                        t.setPhone(contact);
-                                        t.setEducation(education);
-                                        JOptionPane.showMessageDialog(jButton1, "Tenant Updated!");
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else 
-                    {
-                        JOptionPane.showMessageDialog(jButton1, "Invalid email address");
+        try {
+                if ( result == null) {
+                    printError("Result ", "No such Booking found");
+
+                } else {
+                    CardLayout Cards = (CardLayout) parentPanel.getLayout();
+                    Cards.show(parentPanel, "card8");
+                    for (Booking sr : result) {
+                        
+
+                        Object[] row = {sr.getBookingId(),sr.getbProperty().getPropertyId(),sr.getStatus(),sr.getsDate(),sr.geteDate()};
+                        DefaultTableModel model = (DefaultTableModel) bgTable.getModel();
+                       
+                        // Tmodel.setValueAt(tempLabel.getIcon(), 0, 3);
+                        model.addRow(row);
                     }
                 }
+            } catch (Exception e1) {
+                printError("Error", "Display Error Contact Suppport");
             }
-        }
-        
     }//GEN-LAST:event_jButton1ActionPerformed
+    private void printError(String d, String m) {
+        JOptionPane optionPane = new JOptionPane(m, JOptionPane.ERROR_MESSAGE);
+        JDialog dialog = optionPane.createDialog(d);
+        dialog.setAlwaysOnTop(true);
+        dialog.setVisible(true);
+    }
 
     /**
      * @param args the command line arguments
@@ -644,19 +1275,36 @@ public class TenantDashBoard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel allProperty;
+    private javax.swing.JLabel amenLabel;
+    private javax.swing.JList<String> amenList;
+    private javax.swing.JTable bTable;
     private javax.swing.JButton backBtn;
+    private javax.swing.JTable bgTable;
     private javax.swing.JButton bookBtn;
     private javax.swing.JPanel bookMark;
-    private javax.swing.JPanel edit;
+    private javax.swing.JPanel bookingView;
+    private javax.swing.JPanel btnPanel;
     private javax.swing.JButton editBtn;
     private javax.swing.JButton exitBtn;
+    private javax.swing.JLabel facLabel;
+    private javax.swing.JList<String> facList;
+    private com.toedter.calendar.JDateChooser frDateCh;
+    private com.toedter.calendar.JDateChooser frDateCh2;
+    private javax.swing.JButton fromBookMark;
+    private javax.swing.JButton fromPropBtn;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -669,21 +1317,40 @@ public class TenantDashBoard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JButton magnifyBtn;
+    private javax.swing.JButton makeBkBtn;
     private javax.swing.JLabel nameHolder;
+    private javax.swing.JTable pTable;
     private javax.swing.JPanel parentPanel;
     private javax.swing.JPanel propertyView;
+    private javax.swing.JLabel resLabel;
+    private javax.swing.JList<String> resList;
     private javax.swing.JPanel search;
     private javax.swing.JButton searchBtn;
     private javax.swing.JButton signoutBtn;
     private javax.swing.JButton stayBtn;
     private javax.swing.JPanel stays;
+    private javax.swing.JPanel tenantView;
+    private com.toedter.calendar.JDateChooser toDateCh;
+    private com.toedter.calendar.JDateChooser toDateCh2;
+    private javax.swing.JLabel typeLabel;
+    private javax.swing.JList<String> typeList;
+    private javax.swing.JButton undoBkBtn;
     // End of variables declaration//GEN-END:variables
 }

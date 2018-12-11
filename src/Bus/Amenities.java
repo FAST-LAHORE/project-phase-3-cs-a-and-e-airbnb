@@ -12,5 +12,5 @@ import java.io.Serializable;
  * @author hp
  */
 public enum Amenities implements Serializable {
-    
+    HotWater, Kitchen, AttachedBath, SingleBed, DoubleBed, Family;
 }

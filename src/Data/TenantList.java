@@ -30,7 +30,7 @@ public class TenantList {
         load();
         Boolean exists = false;
         for (Tenant t : tList) {
-            if (t.getUserId().equals(T.getUserId())) {
+            if (t.getUserId().equals(T.getUserId()) || t.getEmail().equals(T.getEmail())) {
                 exists = true;
             }
         }
@@ -47,6 +47,16 @@ public class TenantList {
         Tenant e = null;
         for (Tenant t : tList) {
             if (t.getUserId().equals(userId)) {
+                e = t;
+            }
+        }
+        return e;
+    }
+     public static Tenant getEmailTenant(String userId) throws ClassNotFoundException {
+        load();
+        Tenant e = null;
+        for (Tenant t : tList) {
+            if (t.getEmail().equals(userId)) {
                 e = t;
             }
         }

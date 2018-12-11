@@ -28,7 +28,7 @@ public class LandLordList {
        load();
        Boolean exists = false;
        for(LandLord t : lList)  {
-           if(t.getUserId().equals(l.getUserId()))  {
+           if(t.getUserId().equals(l.getUserId()) || t.getEmail().equals(l.getEmail()))  {
                exists = true;
            }
        }
@@ -44,6 +44,16 @@ public class LandLordList {
         LandLord e = null;
         for(LandLord t : lList)  {
             if(t.getUserId().equals(userId))  {
+                e = t;
+            }
+        }
+        return e;
+    }
+       public static LandLord getEmailLandLord(String userId) throws ClassNotFoundException   {
+        load();
+        LandLord e = null;
+        for(LandLord t : lList)  {
+            if(t.getEmail().equals(userId))  {
                 e = t;
             }
         }

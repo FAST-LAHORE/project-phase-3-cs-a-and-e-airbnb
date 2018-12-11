@@ -12,5 +12,6 @@ import java.io.Serializable;
  * @author hp
  */
 public enum Facilties implements Serializable {
+   No_Cancellation_Charge, Gym, Independent, South_Facing;
     
 }

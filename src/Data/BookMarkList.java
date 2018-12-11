@@ -29,7 +29,7 @@ public class BookMarkList {
         load();
         Boolean exists = false;
         for (BookMark t : bList) {
-            if (t.getBookMarkId().equals(b.getBookMarkId())) {
+            if ((t.getBookProperty().getPropertyId().equals(b.getBookProperty().getPropertyId())) && (t.getBookTenant().getUserId().equals(b.getBookTenant().getUserId()))) {
                 exists = true;
             }
         }
