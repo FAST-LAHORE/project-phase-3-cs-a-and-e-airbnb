@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Gui;
+import Bus.Tenant;
 import javax.swing.JRootPane;
 /**
  *
@@ -20,6 +21,20 @@ public class ViewUser extends javax.swing.JFrame {
         getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         initComponents();
         parentPanel.removeAll();
+        parentPanel.add(propertyView);
+        parentPanel.repaint();
+        parentPanel.revalidate();
+    }
+    public ViewUser(Tenant c)
+    {
+        jTextField1.setText(c.getName());
+        jTextField2.setText(c.getEmail());
+        jTextField3.setText(c.getUserId());
+        jTextField4.setText(c.getPhone());
+        jTextField5.setText(c.getCurrency());
+        jTextField5.setText(c.getAddress());
+        jTextField6.setText(c.getWork());
+        jTextField7.setText(c.getEducation());
     }
 
     /**
