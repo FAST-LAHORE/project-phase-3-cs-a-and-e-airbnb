@@ -1120,11 +1120,17 @@ public class TenantDashBoard extends javax.swing.JFrame {
                 LocalDate s = frDateCh2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate e = toDateCh2.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 //Integer.parseInt(jTextField6.getText());
-            Bus.system.currentTenant.requestBooking(currentProp,s, e);
+            if(Bus.system.currentTenant.requestBooking(currentProp,s, e))   {
+            
+            
             printError("Success", "Success Requesting Book Mark");
+            }
+            else    {
+                printError("Failure", "Failure Requesting Book Mark");
+            }
         }
         catch(Exception e){
-            printError("Failure", "Failure Requesting Book Mark");
+            printError("Error", "Error Requesting Book Mark");
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed

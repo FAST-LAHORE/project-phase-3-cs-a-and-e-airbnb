@@ -4,21 +4,10 @@
  * and open the template in the editor.
  */
 package Bus;
-
-import Data.PropertyList;
-import static Data.PropertyList.pList;
-import static Data.PropertyList.pfile;
-import Gui.TenantDashBoard;
 import Gui.welcome;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,7 +31,7 @@ public class system implements Serializable {
           Tenant my = new Tenant("Nashit", IdGen.getInstance().genUserId(), "123","img/icon.png", "123", "n@gmail.com", "123");
           Data.TenantList.addTenant(my);
           currentTenant = my;
-//        dummyProperty();
+       dummyProperty();
           new Gui.TenantDashBoard().setVisible(true);
         
 
